@@ -7,7 +7,9 @@ function WithHeaderLayout({ children }: PropsWithChildren) {
   return (
     <>
       <Header />
-      {children}
+      <main className="main-content py-8 flex flex-col justify-center items-center gap-8">
+        {children}
+      </main>
       <Footer />
     </>
   );

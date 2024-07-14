@@ -29,7 +29,7 @@ function MainLayout() {
     }
   }, []);
   return (
-    <main className="main-content py-8 flex flex-col justify-center items-center gap-8">
+    <>
       <div className="text-2xl font-extrabold">
         <TypeIt
           as="h1"
@@ -45,7 +45,7 @@ function MainLayout() {
         />
       </div>
       <ArticleSearch />
-    </main>
+    </>
   );
 }
 
