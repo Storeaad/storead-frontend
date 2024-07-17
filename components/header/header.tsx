@@ -1,7 +1,6 @@
 import Logo from "../logo";
 import AuthMenu from "./auth-menu";
 import HeaderProgress from "./header-progress";
-import ThemeSwitch from "./theme-switch";
 import WriteButton from "./write-button";
 
 function Header() {

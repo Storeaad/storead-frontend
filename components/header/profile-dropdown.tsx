@@ -1,16 +1,12 @@
 "use client";
 
-import { useCallback } from "react";
-
 import { LogOut, User } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 
-import { authMessages } from "@/constants/toastMessages";
-import { logout } from "@/lib/apis/auth/logout";
+import useLogout from "@/hooks/useLogout";
 import { sliceInitial } from "@/utils/sliceInitial";
 
+import ThemeSwitch from "../theme-switch/theme-switch";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
   DropdownMenu,
@@ -19,7 +15,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import ThemeSwitch from "./theme-switch";
 
 interface Props {
   userId: string;
@@ -28,15 +23,7 @@ interface Props {
 }
 
 function ProfileDropdown({ userId, photo, name }: Props) {
-  const router = useRouter();
-  const logoutRequest = useCallback(async () => {
-    await logout();
-
-    //TODO: 서버 에러로 로그아웃 안되었을때 route handler로 refresh token 지워줘야됨
-    toast.success(authMessages.LOGOUT);
-    router.replace("/");
-    router.refresh();
-  }, [router]);
+  const { logoutRequest } = useLogout();
 
   return (
     <DropdownMenu>

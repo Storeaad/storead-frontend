@@ -10,7 +10,7 @@ function Logo() {
       <a href="/">
         <Image
           src={logo}
-          alt="logo_dark"
+          alt="storead logo"
           className="object-cover"
           priority
         />
