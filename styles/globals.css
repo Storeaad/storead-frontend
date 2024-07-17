@@ -34,7 +34,9 @@
 
     --radius: 0.5rem;
 
-    --header-height: 80px;
+    /* FIXME: 헤더 결정되면 주석 지우기 */
+    /* --header-height: 80px; */
+    --header-height: 0px;
     --footer-height: 120px;
     --logo-width: 200px;
   }
