@@ -18,7 +18,7 @@ function AsideTooltip({ children, content }: Props) {
         <TooltipContent
           side="right"
           align="end"
-          alignOffset={18}
+          alignOffset={22}
         >
           <p className="text-xs text-muted-foreground">{content}</p>
         </TooltipContent>

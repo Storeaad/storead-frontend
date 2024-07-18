@@ -1,9 +1,16 @@
+import dynamic from "next/dynamic";
+
 import { getMyProfile } from "@/lib/apis/profile/myProfile";
 
 import AsideThemeButton from "./aside-theme-button";
 import LoginButton from "./login-button";
 import LogoutButton from "./logout-button";
 import ProfileButton from "./profile-button";
+import WriteButton from "./write-button";
+
+// const AsideThemeButton = dynamic(() => import("./aside-theme-button"), {
+//   ssr: false,
+// });
 
 async function AsideBottom() {
   const user = await getMyProfile();
@@ -15,6 +22,9 @@ async function AsideBottom() {
 
       {user != null ? (
         <>
+          {/* Write new article */}
+          <WriteButton />
+
           {/* Profile */}
           <ProfileButton user={user} />
 
