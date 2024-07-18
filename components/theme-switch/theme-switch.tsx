@@ -5,15 +5,14 @@ import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
-import AsideTooltip from "../sidebar/components/aside-tooltip";
 import { Button } from "../ui/button";
 import { Switch } from "../ui/switch";
 
 interface Props {
-  isAside?: boolean;
+  isIcon?: boolean;
 }
 
-function ThemeSwitch({ isAside }: Props) {
+function ThemeSwitch({ isIcon }: Props) {
   const { theme, setTheme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -25,22 +24,18 @@ function ThemeSwitch({ isAside }: Props) {
 
   return (
     <>
-      {isAside === true ? (
-        <AsideTooltip
-          content={`${theme === "dark" ? "라이트" : "다크"} 테마로 변경`}
+      {isIcon === true ? (
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          >
-            {(theme == null && systemTheme === "dark") || theme === "dark" ? (
-              <Moon className="h-4 w-4" />
-            ) : (
-              <Sun className="h-4 w-4" />
-            )}
-          </Button>
-        </AsideTooltip>
+          {(theme == null && systemTheme === "dark") || theme === "dark" ? (
+            <Moon className="h-4 w-4" />
+          ) : (
+            <Sun className="h-4 w-4" />
+          )}
+        </Button>
       ) : (
         <div className="flex w-full justify-between items-center">
           <div className="flex items-center">

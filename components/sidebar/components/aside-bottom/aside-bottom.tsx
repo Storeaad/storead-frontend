@@ -1,6 +1,6 @@
-import ThemeSwitch from "@/components/theme-switch/theme-switch";
 import { getMyProfile } from "@/lib/apis/profile/myProfile";
 
+import AsideThemeButton from "./aside-theme-button";
 import LoginButton from "./login-button";
 import LogoutButton from "./logout-button";
 import ProfileButton from "./profile-button";
@@ -11,7 +11,7 @@ async function AsideBottom() {
   return (
     <div className="flex flex-col items-center space-y-4">
       {/* Theme switch */}
-      <ThemeSwitch isAside={true} />
+      <AsideThemeButton />
 
       {user != null ? (
         <>
