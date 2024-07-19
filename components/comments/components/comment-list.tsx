@@ -13,15 +13,12 @@ interface Props {
 function CommentList({ comments }: Props) {
   return (
     <Card className="w-full">
-      <CardHeader>
-        <CardTitle>댓글</CardTitle>
-      </CardHeader>
       <CardContent>
         {comments != null && comments.length > 0 ? (
-          <ul className="space-y-4">
-            {comments.map((comment) => (
+          <ul className="pt-6">
+            {comments.map((comment, idx) => (
               <li key={`${comment.id}`}>
-                <div className="flex items-start space-x-4">
+                <div className="flex space-x-4">
                   <Avatar>
                     <AvatarFallback>
                       {comment.username[0].toUpperCase()}
@@ -40,9 +37,7 @@ function CommentList({ comments }: Props) {
                     <p className="mt-1">{comment.content}</p>
                   </div>
                 </div>
-                {comments.indexOf(comment) !== comments.length - 1 && (
-                  <Separator className="my-4" />
-                )}
+                {idx !== comments.length - 1 && <Separator className="my-4" />}
               </li>
             ))}
           </ul>

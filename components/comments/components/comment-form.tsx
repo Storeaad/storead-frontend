@@ -56,7 +56,7 @@ function CommentForm({ articleId }: Props) {
   }
 
   return (
-    <Card className="w-full">
+    <Card className="w-full bg-secondary">
       <CardContent className="pt-6">
         <Form {...form}>
           <form
@@ -71,7 +71,7 @@ function CommentForm({ articleId }: Props) {
                   <FormControl>
                     <div className="flex items-center space-x-2">
                       <Input
-                        placeholder="댓글을 입력해주세요..."
+                        placeholder="댓글을 입력해주세요."
                         disabled={isPending}
                         className="flex-grow"
                         {...field}

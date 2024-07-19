@@ -12,13 +12,25 @@ const RichEditorViewer = ({ content, ...props }: Props) => {
     extensions: [StartKit],
     content,
     editable: false,
+    editorProps: {
+      attributes: {
+        class: "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto",
+      },
+    },
   });
 
+  if (!editor) return null;
+
   return (
-    <EditorContent
-      editor={editor}
-      {...props}
-    />
+    <div
+      className="p-4 min-h-[200px]"
+      onClick={() => editor.chain().focus().run()}
+    >
+      <EditorContent
+        editor={editor}
+        {...props}
+      />
+    </div>
   );
 };
 
