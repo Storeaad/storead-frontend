@@ -1,10 +1,10 @@
 "use client";
 
-import { ACCESS_TOKEN, LOGIN_TOAST } from "@/constants/identifier";
+import { ACCESS_TOKEN, ERROR_TOAST } from "@/constants/identifier";
 import { authMessages } from "@/constants/toastMessages";
 import { findAccessTokenFromSetCookies } from "@/utils/findAccessTokenFromSetCookies";
 
-import { getClientCookies, setClientCookies } from "../clientCookies";
+import { getClientCookies } from "../clientCookies";
 import { InstanceInit, baseInstance } from "./base-instance";
 
 export const clientInstance = async <T>({
@@ -50,8 +50,11 @@ export const clientInstance = async <T>({
     });
 
     if (!refreshRes.ok) {
-      setClientCookies(LOGIN_TOAST, authMessages.TOKEN_EXPIRED);
-      window.history.pushState(null, "", "/login");
+      window.history.replaceState(
+        null,
+        "",
+        `/login?${ERROR_TOAST}=${authMessages.TOKEN_EXPIRED}`,
+      );
     }
 
     const setCookies = refreshRes.headers.getSetCookie();

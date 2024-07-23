@@ -2,16 +2,17 @@
 
 import { useEffect, useRef } from "react";
 
-import Cookies from "js-cookie";
-import { LucideCircleX } from "lucide-react";
+import { LucideCircleCheck, LucideCircleX } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import TypeIt from "typeit-react";
 
-import { MAIN_TOAST } from "@/constants/identifier";
+import { ERROR_TOAST, SUCCESS_TOAST } from "@/constants/identifier";
 
 import ArticleSearch from "../article-search/article-search";
 
 function MainLayout() {
+  const searchParams = useSearchParams();
   const isMounted = useRef(false);
 
   useEffect(() => {
@@ -19,15 +20,22 @@ function MainLayout() {
       isMounted.current = true;
       return;
     }
-    const mainToast = Cookies.get(MAIN_TOAST);
 
-    if (mainToast) {
-      toast.error(mainToast, {
+    const errorMessage = searchParams.get(ERROR_TOAST);
+    const successMessage = searchParams.get(SUCCESS_TOAST);
+
+    if (errorMessage) {
+      toast.error(errorMessage, {
         icon: <LucideCircleX color="red" />,
       });
-      Cookies.remove(MAIN_TOAST);
     }
-  }, []);
+    if (successMessage) {
+      toast.success(successMessage, {
+        icon: <LucideCircleCheck color="green" />,
+      });
+    }
+  }, [searchParams]);
+
   return (
     <>
       <div className="text-2xl font-extrabold">
