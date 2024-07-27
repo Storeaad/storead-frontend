@@ -33,6 +33,10 @@ const nextConfig = {
         hostname: "api.storead.site",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "storead-storage.s3.amazonaws.com",
+      },
     ],
   },
 };

@@ -1,5 +1,7 @@
 "use client";
 
+import { CommonResponse } from "api-domain";
+
 import { Article, RequestArticleList } from "@/api/generated/models";
 
 import { clientInstance } from "../client-instance";
@@ -7,7 +9,7 @@ import { clientInstance } from "../client-instance";
 export const createArticle = async (
   payload: RequestArticleList & { slug?: string },
 ) => {
-  const res = await clientInstance<Article>({
+  const res = await clientInstance<CommonResponse<Article>>({
     endPoint: `/articles`,
     method: "POST",
     body: JSON.stringify(payload),
@@ -15,5 +17,5 @@ export const createArticle = async (
     cache: "no-store",
   });
 
-  return res;
+  return res.results.data;
 };

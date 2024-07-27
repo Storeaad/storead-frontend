@@ -65,7 +65,7 @@ export const useReviewForm = () => {
       description: text || form.getValues("title"),
       tags,
       title: form.getValues("title"),
-      //FIXME: slug 안넣어도 되게 서버 수정중
+      //FIXME: slug 안넣어도 되는지 확인 필요
       slug: form.getValues("title").replace(/\s/g, "-"),
     });
 

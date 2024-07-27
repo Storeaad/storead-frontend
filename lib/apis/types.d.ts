@@ -23,7 +23,7 @@ declare module "api-domain" {
     status_code: number;
     status: boolean;
     results: {
-      message: string;
+      message: string | null;
       data: T;
     };
   };

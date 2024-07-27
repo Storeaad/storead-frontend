@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useInView } from "react-intersection-observer";
 
+import { CommonResponse } from "api-domain";
 import { Search } from "lucide-react";
 import Link from "next/link";
 
@@ -33,11 +34,12 @@ function ArticleSearch() {
     isLoading,
     isFetchingNextPage,
     error,
-  } = useInfiniteQuery<PaginatedArticleList>({
+  } = useInfiniteQuery<CommonResponse<PaginatedArticleList>>({
     queryKey: [QUERY_KEY.ARTICLES, searchTerm],
-    queryFn: ({ pageParam }) => getArticleList({}),
+    queryFn: ({ pageParam }) =>
+      getArticleList(new URLSearchParams({ q: searchTerm })),
     initialPageParam: 0,
-    getNextPageParam: (lastPage) => lastPage.next,
+    getNextPageParam: (lastPage) => lastPage.results.data.next,
     enabled: !!searchTerm,
   });
 
@@ -53,10 +55,15 @@ function ArticleSearch() {
   }, [inView, fetchNextPage, hasNextPage]);
 
   //FIXME: 페이지네이션 api 완성시 results 구조분해 해야됨
-  const articles = data?.pages.flatMap(({ results }) => results) || [];
+  const articles =
+    data?.pages.flatMap(
+      ({
+        results,
+      }: {
+        results: { message: string | null; data: PaginatedArticleList };
+      }) => results.data.results,
+    ) || [];
   // const articles = data?.pages.flatMap((page) => page) || [];
-
-  // console.log(articles);
 
   return (
     <div className="space-y-4">

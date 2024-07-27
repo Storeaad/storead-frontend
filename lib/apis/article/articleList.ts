@@ -1,5 +1,7 @@
 "use client";
 
+import { CommonResponse } from "api-domain";
+
 import {
   ArticlesListParams,
   PaginatedArticleList,
@@ -7,16 +9,15 @@ import {
 
 import { clientInstance } from "../client-instance";
 
-export const getArticleList = async (params: ArticlesListParams) => {
-  const searchParams = new URLSearchParams(params);
+export const getArticleList = async (searchParams: URLSearchParams) => {
+  // const searchParams = new URLSearchParams(params);
   // const mapParams = Object.entries(params);
   // mapParams.forEach(([key, value]) => searchParams.append(key, value));
 
-  const res = await clientInstance<PaginatedArticleList>({
-    endPoint: `/articles`,
+  const res = await clientInstance<CommonResponse<PaginatedArticleList>>({
+    endPoint: `/search`,
     params: searchParams,
     includeAuth: false,
-    // headers: { "Content-Type": "application/json" },
   });
 
   return res;

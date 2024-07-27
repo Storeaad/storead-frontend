@@ -1,5 +1,7 @@
 "use client";
 
+import { CommonResponse } from "api-domain";
+
 import { BookPayload } from "@/api/generated/models/bookPayload";
 import { BookResponse } from "@/api/generated/models/bookResponse";
 import { ROUTE_HREF } from "@/constants/routeHref";
@@ -20,11 +22,11 @@ export const booksCreate = async (payload: BookPayload) => {
     type: contentType,
   });
 
-  const res = await clientInstance<BookResponse>({
+  const res = await clientInstance<CommonResponse<BookResponse>>({
     endPoint: `/books`,
     method: "POST",
     body: appendObjectToFormData({ ...payload, thumbnail_url: imageFile }),
   });
 
-  return res;
+  return res.results.data;
 };
