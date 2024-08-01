@@ -23,6 +23,7 @@ import {
   Underline as UnderlineIcon,
   Undo,
 } from "lucide-react";
+import { Markdown } from "tiptap-markdown";
 
 import { Button } from "@/components/ui/button";
 
@@ -50,13 +51,14 @@ const RichEditor = forwardRef<RichEditorRef, Props>(function RichEditor(
     extensions: [
       StarterKit,
       Underline,
+      Markdown,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
     ],
     content,
     editorProps: {
       attributes: {
         class:
-          "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none",
+          "tiptap prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none",
       },
     },
   });
@@ -64,6 +66,7 @@ const RichEditor = forwardRef<RichEditorRef, Props>(function RichEditor(
   useImperativeHandle(ref, () => ({
     getJSON: () => editor?.getJSON(),
     getText: () => editor?.getText(),
+    getMarkdown: () => editor?.storage.markdown.getMarkdown(),
   }));
 
   if (!editor) {
