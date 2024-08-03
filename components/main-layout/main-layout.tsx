@@ -1,19 +1,30 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 
 import { LucideCircleCheck, LucideCircleX } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import TypeIt from "typeit-react";
 
 import { ERROR_TOAST, SUCCESS_TOAST } from "@/constants/identifier";
 
-import ArticleSearch from "../article-search/article-search";
+import SearchForm from "../search-form/search-form";
+
+type SearchFormInputs = {
+  query: string;
+};
 
 function MainLayout() {
+  const methods = useForm<SearchFormInputs>();
   const searchParams = useSearchParams();
+  const router = useRouter();
   const isMounted = useRef(false);
+
+  const onSubmit = (data: SearchFormInputs) => {
+    router.push(`/search?query=${data.query}`);
+  };
 
   useEffect(() => {
     if (isMounted.current === false) {
@@ -44,7 +55,7 @@ function MainLayout() {
           options={{ deleteSpeed: 50 }}
           getBeforeInit={(instance) => {
             instance
-              .type("북로그에 오신 것을 환영합니다!")
+              .type("스토리드에 오신 것을 환영합니다!")
               .pause(3000)
               .delete()
               .type("원하시는 서평을 검색해보세요.");
@@ -52,7 +63,11 @@ function MainLayout() {
           }}
         />
       </div>
-      <ArticleSearch />
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <SearchForm />
+        </form>
+      </FormProvider>
     </>
   );
 }
