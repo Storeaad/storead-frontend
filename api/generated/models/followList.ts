@@ -10,5 +10,4 @@ import type { Following } from "./following";
 export type FollowList = {
   followers: Following[];
   followers_count: number;
-  status_code: number;
 };
