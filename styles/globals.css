@@ -38,6 +38,7 @@
     /* --header-height: 80px; */
     --header-height: 0px;
     --footer-height: 120px;
+    --aside-width: 64px;
     --logo-width: 200px;
   }
 
@@ -79,8 +80,13 @@
     height: var(--footer-height);
   }
 
+  .aside-w {
+    width: var(--aside-width);
+  }
+
   .main-content {
-    width: 100vw;
+    margin-left: var(--aside-width);
+    width: calc(100vw - var(--aside-width));
     min-height: calc(100vh - var(--header-height) - var(--footer-height));
   }
 }
