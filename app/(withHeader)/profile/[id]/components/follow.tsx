@@ -44,6 +44,8 @@ function Follow({ profileId }: Props) {
           <FollowModal
             trigger="followers"
             list={followerList.followers || []}
+            profileId={profileId}
+            isMe={profileId === userInfo?.profile_id}
           />
         </div>
         <LuDot />
@@ -54,6 +56,7 @@ function Follow({ profileId }: Props) {
           <FollowModal
             trigger="followings"
             list={followingList.followers || []}
+            profileId={profileId}
           />
         </div>
       </section>
