@@ -24,6 +24,7 @@ function BookSearchInput() {
             <Input
               placeholder="검색어를 입력해주세요."
               className="pl-12"
+              autoFocus
               {...field}
             />
           </FormControl>
