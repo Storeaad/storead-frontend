@@ -12,11 +12,9 @@ import { QUERY_KEY } from "@/constants/queryKey";
 import { followerListQueryOption } from "@/hooks/queryOptions/followerListQueryOption";
 import { followingListQueryOption } from "@/hooks/queryOptions/followingListQueryOption";
 
-interface Props {
-  profileId: string;
-}
+import { FollowProps } from "../type";
 
-function Follow({ profileId }: Props) {
+function Follow({ profileId }: FollowProps) {
   const queryClient = useQueryClient();
   const userInfo = queryClient.getQueryData<Profile | undefined>([
     QUERY_KEY.MY_PROFILE,

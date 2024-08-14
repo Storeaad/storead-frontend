@@ -1,4 +1,4 @@
-import { FollowList } from "@/api/generated/models";
+import { Profile } from "@/api/generated/models";
 
 export interface ProfileProps {
   params: { id: string };
@@ -14,10 +14,13 @@ export interface UserNameProps {
 }
 
 export interface FollowProps {
-  followers: FollowList;
-  followings: FollowList;
+  profileId: string;
 }
 
 export interface IntroduceProps {
   introduce?: string;
 }
+
+export type ProfilePayload = Partial<
+  Pick<Profile, "profile_photo" | "about_me" | "name">
+>;
