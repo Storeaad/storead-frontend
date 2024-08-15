@@ -9,12 +9,14 @@ import { ProfilePayload } from "../../type";
 
 interface Props {
   setDisableForm: () => void;
-  setIntroduce: (content: string) => void;
+  setIntroduce?: (content: string) => void;
+  setName?: (name: string) => void;
 }
 
 export const useUpdateProfileMutation = ({
   setDisableForm,
   setIntroduce,
+  setName,
 }: Props) => {
   const queryClient = useQueryClient();
 
@@ -23,7 +25,10 @@ export const useUpdateProfileMutation = ({
     onSuccess: (newData) => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEY.MY_PROFILE] });
       toast("프로필 정보가 정상적으로 수정되었습니다.");
-      setIntroduce(newData.about_me ?? "");
+
+      if (setIntroduce) setIntroduce(newData.about_me ?? "");
+      if (setName) setName(newData.name);
+
       setDisableForm();
     },
   });

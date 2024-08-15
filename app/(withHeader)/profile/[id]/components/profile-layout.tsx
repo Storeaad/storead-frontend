@@ -31,9 +31,15 @@ function ProfileLayout({ id }: Props) {
       <ProfileImage
         imageUrl={userProfile?.profile_photo || myProfile?.profile_photo}
       />
-      <UserName name={userProfile?.name || myProfile?.name} />
+      <UserName
+        name={userProfile?.name || myProfile?.name}
+        profileId={id}
+      />
       <Follow profileId={id} />
-      <Introduce introduce={userProfile?.about_me || myProfile?.about_me} />
+      <Introduce
+        introduce={userProfile?.about_me || myProfile?.about_me}
+        profileId={id}
+      />
     </>
   );
 }
