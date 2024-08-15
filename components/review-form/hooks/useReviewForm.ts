@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { DateRange } from "react-day-picker";
+// import { DateRange } from "react-day-picker";
 import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 
-import { RichEditorRef } from "@/components/rich-editor/rich-editor";
+import { TUIEditorRef } from "@/components/tui-editor/tui-editor";
 import { useSelectBook } from "@/hooks/useSelectBook";
 import { createArticle } from "@/lib/apis/article/createArticle";
 import { booksCreate } from "@/lib/apis/book/booksCreate";
@@ -24,7 +24,9 @@ export type ReviewFormValue = {
 export const useReviewForm = () => {
   const router = useRouter();
   const bookSearchRef = useRef<HTMLDivElement>(null);
-  const richEditorRef = useRef<RichEditorRef>(null);
+  //FIXME: tiptap 에디터 코드
+  // const richEditorRef = useRef<RichEditorRef>(null);
+  const tuiEditorRef = useRef<TUIEditorRef>(null);
   const form = useForm<ReviewFormValue>({
     resolver: zodResolver(reviewSchema),
     defaultValues: {
@@ -54,15 +56,18 @@ export const useReviewForm = () => {
       thumbnail_url: selectedBook.image,
     });
 
-    const body = richEditorRef.current?.getJSON();
+    //FIXME: tiptap 에디터 코드
+    // const body = richEditorRef.current?.getJSON();
 
     //FIXME: 본문 내용을 요약한 내용 출력 (현재는 값이 링크든 뭐든 그냥 넣는중)
-    const text = richEditorRef.current?.getText()?.slice(0, 30);
+    // const text = richEditorRef.current?.getText()?.slice(0, 30);
+
+    const body = tuiEditorRef.current?.getMarkdown();
 
     const article = await createArticle({
       body: JSON.stringify(body),
       book: bookDetail.id,
-      description: text || form.getValues("title"),
+      description: form.getValues("title"),
       tags,
       title: form.getValues("title"),
       //FIXME: slug 안넣어도 되는지 확인 필요
@@ -76,7 +81,7 @@ export const useReviewForm = () => {
     selectedBook,
     form,
     bookSearchRef,
-    richEditorRef,
+    tuiEditorRef,
     onSubmit,
   };
 };

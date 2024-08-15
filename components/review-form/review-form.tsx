@@ -1,6 +1,6 @@
 "use client";
 
-// import RichEditor from "../rich-editor/rich-editor";
+import TUIEditor from "../tui-editor/tui-editor";
 import { Form } from "../ui/form";
 import ReviewButtonGroup from "./components/review-button-group";
 // import Period from "./components/period";
@@ -14,7 +14,7 @@ import { useReviewForm } from "./hooks/useReviewForm";
 //TODO: 2. "다시 선택하기" 클릭 시 검색창에 기본적으로 책이름 표시
 
 function ReviewForm() {
-  const { form, selectedBook, onSubmit, bookSearchRef, richEditorRef } =
+  const { form, selectedBook, onSubmit, bookSearchRef, tuiEditorRef } =
     useReviewForm();
 
   return (
@@ -35,7 +35,7 @@ function ReviewForm() {
             <Title />
             <Tags />
             {/* <Period /> */}
-            <ReviewEditor ref={richEditorRef} />
+            <TUIEditor ref={tuiEditorRef} />
             <ReviewButtonGroup />
           </div>
         </div>
