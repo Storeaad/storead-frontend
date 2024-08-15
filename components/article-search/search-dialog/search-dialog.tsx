@@ -1,9 +1,9 @@
-import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { FormProvider } from "react-hook-form";
 
 import { Search } from "lucide-react";
 
 import SearchForm from "@/components/search-form/search-form";
+import AsideTooltip from "@/components/sidebar/components/aside-tooltip";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -16,26 +16,22 @@ import ArticleList from "../article-list/article-list";
 import { useSearchForm } from "../hooks/useSearchForm";
 import ViewMode from "../view-mode/view-mode";
 
-interface Props {
-  trigger?: ReactNode;
-}
-
-function SearchDialog({
-  trigger = (
-    <Button
-      type="button"
-      variant="ghost"
-      size="icon"
-      className="relative"
-    >
-      <Search className="w-4 h-4" />
-    </Button>
-  ),
-}: Props) {
+function SearchDialog() {
   const { methods, searchTerm, onSubmit } = useSearchForm();
   return (
     <Dialog>
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
+      <AsideTooltip content="게시글 검색">
+        <DialogTrigger asChild>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="relative"
+          >
+            <Search className="w-4 h-4" />
+          </Button>
+        </DialogTrigger>
+      </AsideTooltip>
       <DialogContent className="p-4 overflow-hidden shadow-lg">
         <DialogHeader>
           <div className="flex flex-1 mb-4 justify-center space-x-4">

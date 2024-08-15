@@ -10,7 +10,7 @@ import {
 interface Props extends Required<PropsWithChildren> {
   content: string;
 }
-function AsideTooltip({ children, content }: Props) {
+const AsideTooltip = ({ children, content }: Props) => {
   return (
     <TooltipProvider>
       <Tooltip>
@@ -25,6 +25,6 @@ function AsideTooltip({ children, content }: Props) {
       </Tooltip>
     </TooltipProvider>
   );
-}
+};
 
 export default AsideTooltip;
