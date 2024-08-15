@@ -11,6 +11,7 @@ export interface ProfileImageProps {
 
 export interface UserNameProps {
   name?: string;
+  profileId: string;
 }
 
 export interface FollowProps {
@@ -19,6 +20,7 @@ export interface FollowProps {
 
 export interface IntroduceProps {
   introduce?: string;
+  profileId: string;
 }
 
 export type ProfilePayload = Partial<
