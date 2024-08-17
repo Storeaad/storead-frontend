@@ -1,28 +1,79 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
+import { useDebounce } from "@uidotdev/usehooks";
 import { Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 import { Input } from "@/components/ui/input";
+
+import {
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+  PopoverTrigger,
+} from "../ui/popover";
 
 interface Props {
   placeholder?: string;
 }
 
 const SearchForm = ({ placeholder = "검색어를 입력해주세요." }: Props) => {
-  const { register } = useFormContext();
+  const { register, watch } = useFormContext();
+  const [open, setOpen] = useState(false);
+  const [list, setList] = useState<string[]>([]);
+  const debouncedValue = useDebounce(watch("query", ""), 1000);
+
+  // TODO: 검색어 추천 api 연동하기
+  useEffect(() => {
+    if (debouncedValue) {
+      setOpen(true);
+      setList((old) => [...old, debouncedValue]);
+    } else {
+      setOpen(false);
+    }
+  }, [debouncedValue]);
 
   return (
-    <div className="flex gap-2">
-      <Input
-        {...register("query")}
-        placeholder={placeholder}
-        className="flex-grow"
-      />
-      <Button type="submit">
-        <Search className="w-4 h-4" />
-      </Button>
-    </div>
+    <Popover
+      open={open}
+      onOpenChange={setOpen}
+    >
+      <PopoverAnchor>
+        <div className="flex gap-2">
+          <Input
+            {...register("query")}
+            placeholder={placeholder}
+            className="flex-grow"
+          />
+          <Button type="submit">
+            <Search className="w-4 h-4" />
+          </Button>
+        </div>
+      </PopoverAnchor>
+      <PopoverContent onOpenAutoFocus={(e) => e.preventDefault()}>
+        <Command>
+          <CommandList>
+            <CommandEmpty>검색 결과가 없습니다.</CommandEmpty>
+            <CommandGroup>
+              {list.length > 0 &&
+                list.map((item, idx) => (
+                  <CommandItem key={idx}>{item}</CommandItem>
+                ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
   );
 };
 
