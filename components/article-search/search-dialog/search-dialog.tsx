@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FormProvider } from "react-hook-form";
 
 import { Search } from "lucide-react";
@@ -18,8 +19,17 @@ import ViewMode from "../view-mode/view-mode";
 
 function SearchDialog() {
   const { methods, searchTerm, onSubmit } = useSearchForm();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleArticleClick = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <Dialog>
+    <Dialog
+      open={isOpen}
+      onOpenChange={setIsOpen}
+    >
       <AsideTooltip content="게시글 검색">
         <DialogTrigger asChild>
           <Button
@@ -44,7 +54,10 @@ function SearchDialog() {
           </div>
         </DialogHeader>
         <div className="max-h-[70vh] overflow-auto">
-          <ArticleList searchTerm={searchTerm} />
+          <ArticleList
+            searchTerm={searchTerm}
+            onArticleClick={handleArticleClick}
+          />
         </div>
       </DialogContent>
     </Dialog>

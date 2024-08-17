@@ -12,9 +12,11 @@ import logoIcon from "@/public/storead_icon.svg";
 const ArticleCard = ({
   article,
   viewMode,
+  onArticleClick,
 }: {
   article: Article;
   viewMode: "list" | "grid";
+  onArticleClick: () => void;
 }) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -22,7 +24,10 @@ const ArticleCard = ({
   };
 
   return (
-    <Link href={`/review-detail/${article.id}`}>
+    <Link
+      href={`/review-detail/${article.id}`}
+      onClick={onArticleClick}
+    >
       {viewMode === "list" ? (
         <Card className="overflow-hidden">
           <CardContent className="p-0">
