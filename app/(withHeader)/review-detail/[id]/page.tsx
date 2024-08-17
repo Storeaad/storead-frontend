@@ -14,6 +14,17 @@ async function ReviewDetail({ params: { id } }: Props) {
     getMyProfile(),
   ]);
 
+  // TODO: body가 문자열이 아닌 게시글이 있어서 배포 후에는 삭제할것
+  const parseJSON = (body: string) => {
+    const content = JSON.parse(body);
+
+    if (typeof content === "string") {
+      return content;
+    } else {
+      return body;
+    }
+  };
+
   return (
     <div className="mt-8 flex flex-col gap-8">
       <h2 className="font-bold text-lg">{article.title}</h2>
@@ -23,7 +34,7 @@ async function ReviewDetail({ params: { id } }: Props) {
         author={article.book.author}
         description={article.book.description}
       />
-      <TUIViewer initialValue={JSON.parse(article.body)} />
+      <TUIViewer initialValue={parseJSON(article.body)} />
       <Comments
         articleId={id}
         isUser={Boolean(profile)}
