@@ -1,4 +1,4 @@
-type ObjectValue = string | Blob | BufferSource | FormData;
+type ObjectValue = string | File | Blob | BufferSource | FormData;
 
 export const appendObjectToFormData = (
   obj: Record<string, ObjectValue>,

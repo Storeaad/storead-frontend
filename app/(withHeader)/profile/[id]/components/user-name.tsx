@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { Pencil } from "lucide-react";
+
 import { useQueryClient } from "@tanstack/react-query";
 
 import { Profile } from "@/api/generated/models";
@@ -70,11 +72,12 @@ function UserName({ name: initialName, profileId }: UserNameProps) {
       <h2 className="font-extrabold text-2xl">{name}</h2>
       {isMe ? (
         <Button
-          variant="outline"
-          size="sm"
+          variant="ghost"
+          size="icon"
+          className="rounded-full"
           onClick={() => setIsEditing(true)}
         >
-          수정
+          <Pencil className="h-4 w-4 text-gray-500" />
         </Button>
       ) : null}
     </div>

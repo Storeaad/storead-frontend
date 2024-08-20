@@ -38,8 +38,8 @@ function Introduce({ introduce: initialIntroduce, profileId }: IntroduceProps) {
   return (
     <div
       className={cn(
-        "min-w-52 min-h-36 flex flex-col justify-between p-4 bg-amber-100 rounded-lg shadow-md",
-        theme === "dark" && "shadow-slate-500",
+        "min-w-52 min-h-36 flex flex-col justify-between p-4 bg-amber-100 rounded-lg shadow-md hover:shadow-lg transition-shadow",
+        theme === "dark" && "shadow-slate-500 hover:shadow-slate-400",
       )}
     >
       {isMe ? (
@@ -50,7 +50,7 @@ function Introduce({ introduce: initialIntroduce, profileId }: IntroduceProps) {
           >
             <Textarea
               {...register("introduce")}
-              className="flex-grow mb-2 text-black bg-white"
+              className="flex-grow mb-2 text-black bg-transparent"
             />
             <div className="flex justify-end space-x-2">
               <Button
@@ -75,21 +75,17 @@ function Introduce({ introduce: initialIntroduce, profileId }: IntroduceProps) {
             </div>
           </form>
         ) : (
-          <>
-            <span className="text-black flex-grow">{introduce}</span>
-            <div className="flex justify-end mt-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setIsEditing(true)}
-              >
-                수정
-              </Button>
-            </div>
-          </>
+          <pre
+            className="font-sans text-black flex-grow cursor-text"
+            onClick={() => setIsEditing(true)}
+          >
+            {introduce}
+          </pre>
         )
       ) : (
-        <span className="flex-grow mb-2 text-black">{introduce}</span>
+        <pre className="font-sans text-black flex-grow cursor-text">
+          {introduce}
+        </pre>
       )}
     </div>
   );

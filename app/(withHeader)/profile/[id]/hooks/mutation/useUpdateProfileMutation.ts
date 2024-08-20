@@ -11,12 +11,14 @@ interface Props {
   setDisableForm: () => void;
   setIntroduce?: (content: string) => void;
   setName?: (name: string) => void;
+  setImage?: (src: string) => void;
 }
 
 export const useUpdateProfileMutation = ({
   setDisableForm,
   setIntroduce,
   setName,
+  setImage,
 }: Props) => {
   const queryClient = useQueryClient();
 
@@ -28,6 +30,7 @@ export const useUpdateProfileMutation = ({
 
       if (setIntroduce) setIntroduce(newData.about_me ?? "");
       if (setName) setName(newData.name);
+      if (setImage) setImage(newData.profile_photo);
 
       setDisableForm();
     },

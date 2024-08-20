@@ -6,6 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { myProfileQueryOption } from "@/hooks/queryOptions/myProfileQueryOption";
 import { userProfileQueryOption } from "@/hooks/queryOptions/userProfileQueryOption";
 
+import ArticlesTap from "./articles-tab";
 import Follow from "./follow";
 import Introduce from "./introduce";
 import ProfileImage from "./profile_image";
@@ -29,7 +30,8 @@ function ProfileLayout({ id }: Props) {
   return (
     <>
       <ProfileImage
-        imageUrl={userProfile?.profile_photo || myProfile?.profile_photo}
+        initialImageUrl={userProfile?.profile_photo || myProfile?.profile_photo}
+        profileId={id}
       />
       <UserName
         name={userProfile?.name || myProfile?.name}
@@ -40,6 +42,7 @@ function ProfileLayout({ id }: Props) {
         introduce={userProfile?.about_me || myProfile?.about_me}
         profileId={id}
       />
+      {/* <ArticlesTap /> */}
     </>
   );
 }

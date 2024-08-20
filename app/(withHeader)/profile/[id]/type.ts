@@ -6,7 +6,8 @@ export interface ProfileProps {
 }
 
 export interface ProfileImageProps {
-  imageUrl?: string;
+  initialImageUrl?: string;
+  profileId: string;
 }
 
 export interface UserNameProps {
@@ -24,5 +25,7 @@ export interface IntroduceProps {
 }
 
 export type ProfilePayload = Partial<
-  Pick<Profile, "profile_photo" | "about_me" | "name">
+  Pick<Profile, "about_me" | "name"> & {
+    profile_photo: File | Profile["profile_photo"];
+  }
 >;
