@@ -27,7 +27,10 @@ function SearchResultLayout() {
 
       {/* result article list */}
       <div className="overflow-y-auto">
-        <ArticleList searchTerm={searchTerm} />
+        <ArticleList
+          searchTerm={searchTerm}
+          onArticleClick={() => {}}
+        />
       </div>
     </div>
   );
