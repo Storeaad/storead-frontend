@@ -2,8 +2,8 @@
 
 import { CommonResponse } from "api-domain";
 
-import { BookPayload } from "@/api/generated/models/bookPayload";
-import { BookResponse } from "@/api/generated/models/bookResponse";
+import { BookPayload } from "@/apis/generated/models/bookPayload";
+import { BookResponse } from "@/apis/generated/models/bookResponse";
 import { ROUTE_HREF } from "@/constants/routeHref";
 import { appendObjectToFormData } from "@/utils/appendObjectToFormData";
 import { getExtensionFromContentType } from "@/utils/getExtensionFromContentType";

@@ -2,7 +2,7 @@ import { CommonResponse } from "api-domain";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 
-import { Profile } from "@/api/generated/models";
+import { Profile } from "@/apis/generated/models";
 import { ACCESS_TOKEN } from "@/constants/identifier";
 
 import { serverInstance } from "../server-instance";

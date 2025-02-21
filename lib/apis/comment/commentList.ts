@@ -1,4 +1,4 @@
-import { Comment } from "@/api/generated/models";
+import { Comment } from "@/apis/generated/models";
 
 import { clientInstance } from "../client-instance";
 

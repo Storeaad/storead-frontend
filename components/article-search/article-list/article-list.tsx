@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 import { toast } from "sonner";
 
-import { Article } from "@/api/generated/models";
+import { Article } from "@/apis/generated/models";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import ArticleCard from "../article-card/article-card";

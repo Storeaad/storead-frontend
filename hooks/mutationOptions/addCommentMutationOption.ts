@@ -1,6 +1,6 @@
 import { MutationOptions } from "@tanstack/react-query";
 
-import { Comment } from "@/api/generated/models";
+import { Comment } from "@/apis/generated/models";
 import { CommentPayload, addComment } from "@/lib/apis/comment/addComment";
 
 export const addCommentMutationOption = (
