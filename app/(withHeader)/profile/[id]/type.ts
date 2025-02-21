@@ -1,8 +1,8 @@
 import { Profile } from "@/api/generated/models";
 
 export interface ProfileProps {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export interface ProfileImageProps {

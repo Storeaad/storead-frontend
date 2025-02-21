@@ -10,7 +10,8 @@ import { ACCESS_TOKEN } from "@/constants/identifier";
 import { serverInstance } from "../server-instance";
 
 export const getMyProfile = async () => {
-  const accessToken = cookies().get(ACCESS_TOKEN)?.value;
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get(ACCESS_TOKEN)?.value;
 
   if (!accessToken) return null;
 

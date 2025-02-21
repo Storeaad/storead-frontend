@@ -25,7 +25,7 @@ const userNotAllowedUrl = new Set(["/login"]);
  */
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next();
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const access_token = cookieStore.get(ACCESS_TOKEN)?.value;
   const refresh_token = cookieStore.get(REFRESH_TOKEN)?.value;
 

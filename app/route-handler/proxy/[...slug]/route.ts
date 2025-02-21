@@ -5,9 +5,9 @@ import { NextRequest, NextResponse } from "next/server";
  */
 export const GET = async (
   request: NextRequest,
-  { params }: { params: { slug: string[] } },
+  { params }: { params: Promise<{ slug: string[] }> },
 ) => {
-  const { slug } = params;
+  const { slug } = await params;
   const url = `${slug.join("/")}`;
 
   try {

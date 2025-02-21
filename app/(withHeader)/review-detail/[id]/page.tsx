@@ -5,10 +5,11 @@ import { getArticleDetail } from "@/lib/apis/article/retrieveSingleArticle";
 import { getMyProfile } from "@/lib/apis/profile/myProfile";
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
-async function ReviewDetail({ params: { id } }: Props) {
+async function ReviewDetail({ params }: Props) {
+  const { id } = await params
   const [article, profile] = await Promise.all([
     getArticleDetail(id),
     getMyProfile(),

@@ -6,10 +6,11 @@ import LoginButton from "./login-button";
 import LogoutButton from "./logout-button";
 import ProfileButton from "./profile-button";
 import WriteButton from "./write-button";
+import AsideThemeButton from "./aside-theme-button";
 
-const AsideThemeButton = dynamic(() => import("./aside-theme-button"), {
-  ssr: false,
-});
+// const AsideThemeButton = dynamic(() => import("./aside-theme-button"), {
+//   ssr: false,
+// });
 
 async function AsideBottom() {
   const user = await getMyProfile();

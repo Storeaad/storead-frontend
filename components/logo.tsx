@@ -3,18 +3,19 @@
 import Image from "next/image";
 
 import logo from "@/public/storead_logo.svg";
+import Link from "next/link";
 
 function Logo() {
   return (
     <div className="w-[var(--logo-width)]">
-      <a href="/">
+      <Link href="/">
         <Image
           src={logo}
           alt="storead logo"
           className="object-cover"
           priority
         />
-      </a>
+      </Link>
     </div>
   );
 }
