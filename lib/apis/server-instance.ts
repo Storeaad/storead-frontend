@@ -6,8 +6,6 @@ import { ACCESS_TOKEN } from "@/constants/identifier";
 
 import { InstanceInit, baseInstance } from "./base-instance";
 
-export const dynamic = "force-dynamic";
-
 export const serverInstance = async ({
   endPoint,
   method = "GET",
