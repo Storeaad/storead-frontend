@@ -132,7 +132,7 @@ export async function middleware(request: NextRequest) {
         response.cookies.set(ACCESS_TOKEN, accessToken);
       } else {
         response = NextResponse.redirect(
-          new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}`, responseUrl),
+          new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&requesturl=${request.url}`, responseUrl),
         );
       }
 
