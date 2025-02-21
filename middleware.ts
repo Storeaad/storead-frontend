@@ -117,7 +117,7 @@ export async function middleware(request: NextRequest) {
 
       if (!loginResponse.ok) {
         return NextResponse.redirect(
-          new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}`, responseUrl),
+          new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&requesturl=${request.url}`, responseUrl),
         );
       }
 
