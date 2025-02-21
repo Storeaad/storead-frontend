@@ -106,8 +106,8 @@ export async function middleware(request: NextRequest) {
   // 로그인 인증 경로로 라우팅되면 백엔드 서버에 토큰 발급 요청
   if (request.nextUrl.pathname.startsWith("/auth")) {
     const platform = request.nextUrl.pathname.split("/").at(-1);
-    const referer = request.headers.get("referer");
-    const responseUrl = referer ?? new URL("/", request.url);
+    // const referer = request.headers.get("referer");
+    const responseUrl = new URL("/", request.url);
 
     try {
       const loginResponse = await fetchLogin(
