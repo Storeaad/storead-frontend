@@ -1,5 +1,3 @@
-"use server";
-
 import { CommonResponse } from "api-domain";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
