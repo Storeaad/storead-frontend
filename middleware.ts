@@ -117,7 +117,7 @@ export async function middleware(request: NextRequest) {
 
       if (!loginResponse.ok) {
         return NextResponse.redirect(
-          new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&requesturl=${request.url}`, responseUrl),
+          new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}`, responseUrl),
         );
       }
 
@@ -132,26 +132,16 @@ export async function middleware(request: NextRequest) {
         response.cookies.set(ACCESS_TOKEN, accessToken);
       } else {
         response = NextResponse.redirect(
-          new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&requesturl=${request.url}`, responseUrl),
+          new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}`, responseUrl),
         );
       }
 
       response.headers.set("Set-Cookie", setCookies.join(", "));
     } catch (err) {
-      // // 에러와 함께 요청 정보도 전달
-      // const requestDetails = {
-      //   url: request.url,
-      //   searchParams: Object.fromEntries(request.nextUrl.searchParams.entries()),
-      //   platform,
-      // };
-      // // FIXME: 로그인 실패시 원인 알려줄 필요 있음
-      // return NextResponse.redirect(
-      //   new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&error=${encodeURIComponent(JSON.stringify({
-      //   error: err,
-      //   request: requestDetails
-      // }))}`, responseUrl),
-      // );
-      throw err
+      // FIXME: 로그인 실패시 원인 알려줄 필요 있음
+      return NextResponse.redirect(
+        new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}`, responseUrl),
+      );
     }
   }
 
