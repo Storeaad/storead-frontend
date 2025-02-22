@@ -138,15 +138,9 @@ export async function middleware(request: NextRequest) {
 
       response.headers.set("Set-Cookie", setCookies.join(", "));
     } catch (err) {
-      let message;
       // FIXME: 로그인 실패시 원인 알려줄 필요 있음
-      if ( typeof err === 'object' &&
-        err !== null &&'message' in err &&
-        typeof (err as Record<string, unknown>).message === 'string') {
-          message = err.message
-        }
       return NextResponse.redirect(
-        new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&error=${message}`, responseUrl),
+        new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&error=${JSON.stringify(err)}`, responseUrl),
       );
     }
   }
