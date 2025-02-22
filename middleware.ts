@@ -113,7 +113,7 @@ export async function middleware(request: NextRequest) {
       const loginResponse = await fetchLogin(
         request.nextUrl.searchParams,
         platform,
-      );;
+      );
 
       if (!loginResponse.ok) {
         return NextResponse.redirect(
@@ -138,19 +138,20 @@ export async function middleware(request: NextRequest) {
 
       response.headers.set("Set-Cookie", setCookies.join(", "));
     } catch (err) {
-      // 에러와 함께 요청 정보도 전달
-      const requestDetails = {
-        url: request.url,
-        searchParams: Object.fromEntries(request.nextUrl.searchParams.entries()),
-        platform,
-      };
-      // FIXME: 로그인 실패시 원인 알려줄 필요 있음
-      return NextResponse.redirect(
-        new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&error=${encodeURIComponent(JSON.stringify({
-        error: err,
-        request: requestDetails
-      }))}`, responseUrl),
-      );
+      // // 에러와 함께 요청 정보도 전달
+      // const requestDetails = {
+      //   url: request.url,
+      //   searchParams: Object.fromEntries(request.nextUrl.searchParams.entries()),
+      //   platform,
+      // };
+      // // FIXME: 로그인 실패시 원인 알려줄 필요 있음
+      // return NextResponse.redirect(
+      //   new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&error=${encodeURIComponent(JSON.stringify({
+      //   error: err,
+      //   request: requestDetails
+      // }))}`, responseUrl),
+      // );
+      throw err
     }
   }
 
