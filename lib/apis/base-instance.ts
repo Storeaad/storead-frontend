@@ -10,8 +10,6 @@ export interface InstanceInit extends RequestInit {
   includeAuth?: boolean;
 }
 
-export const dynamic = "force-dynamic";
-
 export const baseInstance = async ({
   endPoint,
   payload,
