@@ -109,18 +109,13 @@ export async function middleware(request: NextRequest) {
     // const referer = request.headers.get("referer");
     const responseUrl = new URL("/", request.url);
 
-    const tryarr = [];
-
     try {
       const loginResponse = await fetchLogin(
         request.nextUrl.searchParams,
         platform,
-      );
-
-      tryarr.push(0);
+      );;
 
       if (!loginResponse.ok) {
-        tryarr.push(1);
         return NextResponse.redirect(
           new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&requesturl=${request.url}`, responseUrl),
         );
@@ -128,46 +123,33 @@ export async function middleware(request: NextRequest) {
 
       const setCookies = loginResponse.headers.getSetCookie();
 
-      tryarr.push(2);
-
       const accessToken = findAccessTokenFromSetCookies(setCookies);
-
-      tryarr.push(3);
 
       if (accessToken) {
         response = NextResponse.redirect(
           new URL(`/?${SUCCESS_TOAST}=${authMessages.SUCCESS}`, responseUrl),
         );
         response.cookies.set(ACCESS_TOKEN, accessToken);
-
-        tryarr.push(4);
       } else {
         response = NextResponse.redirect(
           new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&requesturl=${request.url}`, responseUrl),
         );
-
-        tryarr.push(5);
       }
 
       response.headers.set("Set-Cookie", setCookies.join(", "));
     } catch (err) {
-        // 에러 객체를 안전하게 직렬화
-      const errorDetails = {
-        name: err instanceof Error ? err.name : 'UnknownError',
-        message: err instanceof Error ? err.message : String(err),
-        stack: err instanceof Error ? err.stack : undefined,
-        // Response 타입의 에러인 경우
-        status: err instanceof Response ? err.status : undefined,
-        statusText: err instanceof Response ? err.statusText : undefined,
-        // 객체인 경우 모든 속성을 포함
-        ...(err !== null && typeof err === 'object' ? err : {})
+      // 에러와 함께 요청 정보도 전달
+      const requestDetails = {
+        url: request.url,
+        searchParams: Object.fromEntries(request.nextUrl.searchParams.entries()),
+        platform,
       };
-
-      const encodedError = encodeURIComponent(JSON.stringify(errorDetails))
-      const encodedArr = tryarr.length > 0 ? encodeURIComponent(tryarr.join(", ")) : "noarr";
       // FIXME: 로그인 실패시 원인 알려줄 필요 있음
       return NextResponse.redirect(
-        new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&error=${encodedArr}`, responseUrl),
+        new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&error=${encodeURIComponent(JSON.stringify({
+        error: err,
+        request: requestDetails
+      }))}`, responseUrl),
       );
     }
   }
