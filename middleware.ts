@@ -138,12 +138,22 @@ export async function middleware(request: NextRequest) {
 
       response.headers.set("Set-Cookie", setCookies.join(", "));
     } catch (err) {
-      const errorKeys = err !== null && typeof err === 'object' ? encodeURIComponent(Object.keys(err).join(",")) : "notobject";
-      const errorMessage = err !== null && typeof err === 'object' && 'message' in err && typeof (err as Record<string, unknown>).message === 'string' ? err.message : "nomessage";
-      const errorStatus = err !== null && typeof err === 'object' && 'status' in err && typeof (err as Record<string, unknown>).status === 'number' ? err.status : "nostatus";
+        // 에러 객체를 안전하게 직렬화
+      const errorDetails = {
+        name: err instanceof Error ? err.name : 'UnknownError',
+        message: err instanceof Error ? err.message : String(err),
+        stack: err instanceof Error ? err.stack : undefined,
+        // Response 타입의 에러인 경우
+        status: err instanceof Response ? err.status : undefined,
+        statusText: err instanceof Response ? err.statusText : undefined,
+        // 객체인 경우 모든 속성을 포함
+        ...(err !== null && typeof err === 'object' ? err : {})
+      };
+
+      const encodedError = encodeURIComponent(JSON.stringify(errorDetails))
       // FIXME: 로그인 실패시 원인 알려줄 필요 있음
       return NextResponse.redirect(
-        new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&errorkeys=${errorKeys}&errormessage=${errorMessage}&errorstatus=${errorStatus}`, responseUrl),
+        new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&error=${encodedError}`, responseUrl),
       );
     }
   }
