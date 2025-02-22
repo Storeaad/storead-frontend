@@ -164,9 +164,10 @@ export async function middleware(request: NextRequest) {
       };
 
       const encodedError = encodeURIComponent(JSON.stringify(errorDetails))
+      const encodedArr = tryarr.length > 0 ? encodeURIComponent(tryarr.join(", ")) : "noarr";
       // FIXME: 로그인 실패시 원인 알려줄 필요 있음
       return NextResponse.redirect(
-        new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&error=${tryarr.join(", ")}`, responseUrl),
+        new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&error=${encodedArr}`, responseUrl),
       );
     }
   }
