@@ -138,9 +138,12 @@ export async function middleware(request: NextRequest) {
 
       response.headers.set("Set-Cookie", setCookies.join(", "));
     } catch (err) {
+      const errorKeys = err !== null && typeof err === 'object' ? Object.keys(err).join(",") : "notobject";
+      const errorMessage = err !== null && typeof err === 'object' && 'message' in err && typeof (err as Record<string, unknown>).message === 'string' ? err.message : "nomessage";
+      const errorStatus = err !== null && typeof err === 'object' && 'status' in err && typeof (err as Record<string, unknown>).status === 'number' ? err.status : "nostatus";
       // FIXME: 로그인 실패시 원인 알려줄 필요 있음
       return NextResponse.redirect(
-        new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&error=${err !== null && typeof err === 'object' ? Object.keys(err).join(",") : "notobject"}`, responseUrl),
+        new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&errorkeys=${errorKeys}&errormessage=${errorMessage}&errorstatus=${errorStatus}`, responseUrl),
       );
     }
   }
