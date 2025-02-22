@@ -140,7 +140,7 @@ export async function middleware(request: NextRequest) {
     } catch (err) {
       // FIXME: 로그인 실패시 원인 알려줄 필요 있음
       return NextResponse.redirect(
-        new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&error=${JSON.stringify(err)}`, responseUrl),
+        new URL(`/?${ERROR_TOAST}=${authMessages.FAILED}&error=${err !== null && typeof err === 'object' ? Object.keys(err).join(",") : "notobject"}`, responseUrl),
       );
     }
   }
