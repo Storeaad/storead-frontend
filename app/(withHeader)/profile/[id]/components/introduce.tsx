@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 
 import { useQueryClient } from "@tanstack/react-query";
 
-import { Profile } from "@/api/generated/models";
+import { Profile } from "@/apis/generated/models";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { QUERY_KEY } from "@/constants/queryKey";

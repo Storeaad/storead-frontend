@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { DateRange } from "react-day-picker";
 // import { DateRange } from "react-day-picker";
 import { useForm } from "react-hook-form";
 
@@ -17,7 +18,7 @@ import { reviewSchema } from "../constants/schema";
 
 export type ReviewFormValue = {
   title: string;
-  // period: DateRange;
+  period: DateRange;
   isBookSelected: boolean;
 };
 

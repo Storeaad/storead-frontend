@@ -1,6 +1,6 @@
 import { CommonResponse } from "api-domain";
 
-import { Profile } from "@/api/generated/models";
+import { Profile } from "@/apis/generated/models";
 import { ProfilePayload } from "@/app/(withHeader)/profile/[id]/type";
 import { appendObjectToFormData } from "@/utils/appendObjectToFormData";
 

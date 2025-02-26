@@ -13,7 +13,7 @@ export const serverInstance = async ({
   includeAuth = true,
   ...init
 }: InstanceInit) => {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const accessToken = cookieStore.get(ACCESS_TOKEN)?.value;
 
   const payload = {

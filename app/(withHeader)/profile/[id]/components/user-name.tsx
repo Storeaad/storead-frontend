@@ -6,7 +6,7 @@ import { Pencil } from "lucide-react";
 
 import { useQueryClient } from "@tanstack/react-query";
 
-import { Profile } from "@/api/generated/models";
+import { Profile } from "@/apis/generated/models";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { QUERY_KEY } from "@/constants/queryKey";

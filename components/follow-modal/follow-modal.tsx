@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 
-import { Following } from "@/api/generated/models";
+import { Following } from "@/apis/generated/models";
 import {
   Dialog,
   DialogContent,

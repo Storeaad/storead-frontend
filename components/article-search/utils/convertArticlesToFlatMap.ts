@@ -1,6 +1,6 @@
 import { InfiniteData } from "@tanstack/react-query";
 
-import { PaginatedArticleList } from "@/api/generated/models";
+import { PaginatedArticleList } from "@/apis/generated/models";
 
 export const convertArticlesToFlatMap = (
   data: InfiniteData<PaginatedArticleList, string | null>,
