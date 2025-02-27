@@ -1,5 +1,3 @@
-"use server";
-
 import { serverInstance } from "../server-instance";
 
 export const serverRefresh = async (refreshToken: string) => {

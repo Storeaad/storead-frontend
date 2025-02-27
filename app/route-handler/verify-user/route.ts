@@ -4,7 +4,7 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from "@/constants/identifier";
 
 export async function GET() {
   let response = new Response(null, { status: 401 });
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const [access_token, refresh_token] = [
     cookieStore.get(ACCESS_TOKEN)?.value,
     cookieStore.get(REFRESH_TOKEN)?.value,

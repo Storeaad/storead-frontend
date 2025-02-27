@@ -1,6 +1,6 @@
 import { CommonResponse } from "api-domain";
 
-import { Article } from "@/api/generated/models";
+import { Article } from "@/apis/generated/models";
 
 import { serverInstance } from "../server-instance";
 

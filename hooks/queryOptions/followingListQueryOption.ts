@@ -1,6 +1,6 @@
 import { CommonResponse } from "api-domain";
 
-import { FollowList } from "@/api/generated/models";
+import { FollowList } from "@/apis/generated/models";
 import { QUERY_KEY } from "@/constants/queryKey";
 import { clientInstance } from "@/lib/apis/client-instance";
 

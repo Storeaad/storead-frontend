@@ -5,7 +5,7 @@ import { LuDot } from "react-icons/lu";
 
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 
-import { Profile } from "@/api/generated/models";
+import { Profile } from "@/apis/generated/models";
 import FollowModal from "@/components/follow-modal/follow-modal";
 import { Skeleton } from "@/components/ui/skeleton";
 import { QUERY_KEY } from "@/constants/queryKey";

@@ -11,6 +11,9 @@ import ViewMode from "../view-mode/view-mode";
 function SearchResultLayout() {
   const { searchTerm, methods, onSubmit } = useSearchForm();
 
+  //TODO: 게시글 클릭 함수 기능 추가 필요
+  const onArticleClick = () => {};
+
   return (
     <div className="container mx-auto px-4">
       {/* form header */}
@@ -27,7 +30,10 @@ function SearchResultLayout() {
 
       {/* result article list */}
       <div className="overflow-y-auto">
-        <ArticleList searchTerm={searchTerm} />
+        <ArticleList
+          searchTerm={searchTerm}
+          onArticleClick={onArticleClick}
+        />
       </div>
     </div>
   );

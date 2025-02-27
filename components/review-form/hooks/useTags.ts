@@ -12,6 +12,7 @@ export const useTags = (initialTags?: InitialTags) => {
       tagsStore.replaceAll(initialTags);
     }
     return () => tagsStore.reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return tagsStore;

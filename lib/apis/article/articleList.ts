@@ -2,7 +2,7 @@
 
 import { CommonResponse } from "api-domain";
 
-import { PaginatedArticleList } from "@/api/generated/models";
+import { PaginatedArticleList } from "@/apis/generated/models";
 
 import { clientInstance } from "../client-instance";
 

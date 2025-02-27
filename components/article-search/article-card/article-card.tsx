@@ -3,7 +3,7 @@ import { Calendar, Eye, MessageSquare } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Article } from "@/api/generated/models";
+import { Article } from "@/apis/generated/models";
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";

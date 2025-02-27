@@ -1,4 +1,4 @@
-import { Profile } from "@/api/generated/models";
+import { Profile } from "@/apis/generated/models";
 
 export const getUserProfile = async (id: string) => {
   const response = (await fetch(

@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 import { useQueryClient } from "@tanstack/react-query";
 
-import { Profile } from "@/api/generated/models";
+import { Profile } from "@/apis/generated/models";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

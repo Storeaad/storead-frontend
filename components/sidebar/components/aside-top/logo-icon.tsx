@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import logoIcon from "@/public/storead_icon.svg";
@@ -14,7 +15,7 @@ function LogoIcon() {
         size="icon"
         className="relative"
       >
-        <a href="/">
+        <Link href="/">
           <Image
             src={logoIcon}
             alt="storead icon"
@@ -22,7 +23,7 @@ function LogoIcon() {
             width={16}
             height={16}
           />
-        </a>
+        </Link>
       </Button>
     </AsideTooltip>
   );

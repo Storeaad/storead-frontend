@@ -1,16 +1,15 @@
-"use server";
-
 import { CommonResponse } from "api-domain";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 
-import { Profile } from "@/api/generated/models";
+import { Profile } from "@/apis/generated/models";
 import { ACCESS_TOKEN } from "@/constants/identifier";
 
 import { serverInstance } from "../server-instance";
 
 export const getMyProfile = async () => {
-  const accessToken = cookies().get(ACCESS_TOKEN)?.value;
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get(ACCESS_TOKEN)?.value;
 
   if (!accessToken) return null;
 

@@ -2,7 +2,7 @@
 
 import { CommonResponse } from "api-domain";
 
-import { Article, RequestArticleList } from "@/api/generated/models";
+import { Article, RequestArticleList } from "@/apis/generated/models";
 
 import { clientInstance } from "../client-instance";
 
