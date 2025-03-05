@@ -42,3 +42,5 @@ next-env.d.ts
 # api generation
 orval.config.js
 Storead.yaml
+# Sentry Config File
+.env.sentry-build-plugin
