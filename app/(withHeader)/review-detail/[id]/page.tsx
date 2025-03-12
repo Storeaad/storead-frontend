@@ -9,7 +9,7 @@ interface Props {
 }
 
 async function ReviewDetail({ params }: Props) {
-  const { id } = await params
+  const { id } = await params;
   const [article, profile] = await Promise.all([
     getArticleDetail(id),
     getMyProfile(),

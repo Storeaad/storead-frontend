@@ -35,7 +35,6 @@
     --radius: 0.5rem;
 
     /* FIXME: 헤더 결정되면 주석 지우기 */
-    /* --header-height: 80px; */
     --header-height: 0px;
     --footer-height: 120px;
     --aside-width: 64px;

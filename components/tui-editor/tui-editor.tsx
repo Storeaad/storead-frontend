@@ -15,8 +15,9 @@ import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 
 import { toggleDark } from "./utils/toggle-dark";
+import { Skeleton } from "../ui/skeleton";
 
-const WrappedEditor = dynamic(() => import("./wrapped-editor"), { ssr: false });
+const WrappedEditor = dynamic(() => import("./wrapped-editor"), { ssr: false, loading: () => (<Skeleton className="w-[822px] h-[500px] rounded-md" />)});
 
 const ForwardedEditor = forwardRef(
   (props: EditorProps, forwardedRef: ForwardedRef<Editor>) => {
@@ -40,7 +41,7 @@ interface Props extends EditorProps {}
 
 const TUIEditor = forwardRef<TUIEditorRef, Props>((props: Props, ref) => {
   const editorRef = useRef<Editor | null>(null);
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
   useImperativeHandle(ref, () => ({
     getHTML: () => editorRef.current?.getInstance().getHTML(),
@@ -48,20 +49,19 @@ const TUIEditor = forwardRef<TUIEditorRef, Props>((props: Props, ref) => {
   }));
 
   useEffect(() => {
-    toggleDark();
-  }, [theme]);
+    toggleDark(resolvedTheme === "dark");
+  }, [resolvedTheme]);
 
   return (
     <ForwardedEditor
       ref={editorRef}
-      initialValue=" "
       language="ko-KR"
       previewStyle="vertical"
       height="600px"
-      initialEditType="markdown"
-      hideModeSwitch={true}
+      initialEditType="wysiwyg"
+      hideModeSwitch={false}
       useCommandShortcut={true}
-      theme={theme === "dark" ? "dark" : "default"}
+      theme={resolvedTheme === "dark" ? "dark" : "default"}
       {...props}
     />
   );

@@ -2,10 +2,11 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import dynamic from "next/dynamic";
 
 import { Button } from "@/components/ui/button";
 
-import AsideTooltip from "../aside-tooltip";
+const AsideTooltip = dynamic(() => import("../aside-tooltip"), { ssr: false });
 
 function AsideThemeButton() {
   const { theme, setTheme, systemTheme } = useTheme();
