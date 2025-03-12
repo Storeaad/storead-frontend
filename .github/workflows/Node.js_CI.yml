@@ -6,6 +6,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      NEXT_PUBLIC_VARIABLE_URL: ${{ secrets.NEXT_PUBLIC_VARIABLE_URL }}
+      NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
