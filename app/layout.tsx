@@ -14,11 +14,9 @@ const fontSans = Noto_Sans_KR({
   variable: "--font-sans",
 });
 
-interface RootLayoutProps extends PropsWithChildren {
-  loginModal: React.ReactNode;
-}
+interface RootLayoutProps extends PropsWithChildren {}
 
-export default function RootLayout({ children, loginModal }: RootLayoutProps) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="ko-KR"
@@ -39,7 +37,6 @@ export default function RootLayout({ children, loginModal }: RootLayoutProps) {
             disableTransitionOnChange
           >
             <div className="flex flex-col min-h-screen">
-              {loginModal}
               {children}
               <Toaster />
               <div id="modal-root" />
