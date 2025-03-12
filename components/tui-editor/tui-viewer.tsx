@@ -9,8 +9,9 @@ import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 
 import { toggleDark } from "./utils/toggle-dark";
+import { Skeleton } from "../ui/skeleton";
 
-const WrappedEditor = dynamic(() => import("./wrapped-viewer"), { ssr: false });
+const WrappedEditor = dynamic(() => import("./wrapped-viewer"), { ssr: false, loading: () => (<Skeleton className="w-[500px] h-[500px] rounded-md" />)});
 
 const ForwardedViewer = forwardRef(
   (props: ViewerProps, forwardedRef: ForwardedRef<Viewer>) => {
@@ -26,18 +27,18 @@ ForwardedViewer.displayName = "ForwardedViewer";
 
 const TUIViewer = (props: ViewerProps) => {
   const viewerRef = useRef(null);
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
-    toggleDark();
-  }, [theme]);
+    toggleDark(resolvedTheme === "dark");
+  }, [resolvedTheme]);
 
   return (
     <ForwardedViewer
       ref={viewerRef}
       language="ko-KR"
       height="600px"
-      theme={theme === "dark" ? "dark" : "default"}
+      theme={resolvedTheme === "dark" ? "dark" : "default"}
       {...props}
     />
   );
