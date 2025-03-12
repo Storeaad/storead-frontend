@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import logoIcon from "@/public/storead_icon.svg";
 
 import AsideTooltip from "../aside-tooltip";
-import Link from "next/link";
 
 function LogoIcon() {
   return (
