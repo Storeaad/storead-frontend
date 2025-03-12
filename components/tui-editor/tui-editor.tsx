@@ -40,7 +40,7 @@ interface Props extends EditorProps {}
 
 const TUIEditor = forwardRef<TUIEditorRef, Props>((props: Props, ref) => {
   const editorRef = useRef<Editor | null>(null);
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
   useImperativeHandle(ref, () => ({
     getHTML: () => editorRef.current?.getInstance().getHTML(),
@@ -48,8 +48,8 @@ const TUIEditor = forwardRef<TUIEditorRef, Props>((props: Props, ref) => {
   }));
 
   useEffect(() => {
-    toggleDark();
-  }, [theme]);
+    toggleDark(resolvedTheme === "dark");
+  }, [resolvedTheme]);
 
   return (
     <ForwardedEditor
@@ -59,9 +59,9 @@ const TUIEditor = forwardRef<TUIEditorRef, Props>((props: Props, ref) => {
       previewStyle="vertical"
       height="600px"
       initialEditType="markdown"
-      hideModeSwitch={true}
+      hideModeSwitch={false}
       useCommandShortcut={true}
-      theme={theme === "dark" ? "dark" : "default"}
+      theme={resolvedTheme === "dark" ? "dark" : "default"}
       {...props}
     />
   );

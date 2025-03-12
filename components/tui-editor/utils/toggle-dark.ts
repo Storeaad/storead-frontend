@@ -1,11 +1,12 @@
-export const toggleDark = () => {
+export const toggleDark = (isDark: boolean) => {
   const el = document.querySelector(".toastui-editor-defaultUI");
 
   if (el) {
-    if (el.classList.contains("toastui-editor-dark")) {
-      el.classList.remove("toastui-editor-dark");
-    } else {
+    if (isDark) {
       el.classList.add("toastui-editor-dark");
+    }
+    else {
+      el.classList.remove("toastui-editor-dark");
     }
   }
 };

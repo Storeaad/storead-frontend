@@ -16,7 +16,9 @@ import { serverRefresh } from "./lib/apis/auth/serverRefresh";
 import { serverVerify } from "./lib/apis/auth/serverVerify";
 import { findAccessTokenFromSetCookies } from "./utils/findAccessTokenFromSetCookies";
 
-const protectedUrl = new Set(["/review-form"]);
+//FIXME: 에디터 테마 테스트를 위해 임시 접근 허용
+const protectedUrl = new Set([""]);
+// const protectedUrl = new Set(["/review-form"]);
 
 const userNotAllowedUrl = new Set(["/login"]);
 
