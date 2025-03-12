@@ -15,8 +15,9 @@ import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 
 import { toggleDark } from "./utils/toggle-dark";
+import { Skeleton } from "../ui/skeleton";
 
-const WrappedEditor = dynamic(() => import("./wrapped-editor"), { ssr: false });
+const WrappedEditor = dynamic(() => import("./wrapped-editor"), { ssr: false, loading: () => (<Skeleton className="w-[822px] h-[500px] rounded-md" />)});
 
 const ForwardedEditor = forwardRef(
   (props: EditorProps, forwardedRef: ForwardedRef<Editor>) => {
@@ -54,11 +55,10 @@ const TUIEditor = forwardRef<TUIEditorRef, Props>((props: Props, ref) => {
   return (
     <ForwardedEditor
       ref={editorRef}
-      initialValue=" "
       language="ko-KR"
       previewStyle="vertical"
       height="600px"
-      initialEditType="markdown"
+      initialEditType="wysiwyg"
       hideModeSwitch={false}
       useCommandShortcut={true}
       theme={resolvedTheme === "dark" ? "dark" : "default"}
