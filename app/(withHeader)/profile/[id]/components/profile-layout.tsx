@@ -9,7 +9,7 @@ import { userProfileQueryOption } from "@/hooks/queryOptions/userProfileQueryOpt
 // import ArticlesTap from "./articles-tab";
 import Follow from "./follow";
 import Introduce from "./introduce";
-import ProfileImage from "./profile_image";
+import ProfileImage from "./profile-image";
 import UserName from "./user-name";
 
 interface Props {
