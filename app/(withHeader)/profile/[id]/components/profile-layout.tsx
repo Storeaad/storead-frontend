@@ -11,7 +11,8 @@ import Follow from "./follow";
 import Introduce from "./introduce";
 import ProfileImage from "./profile-image";
 import UserName from "./user-name";
-import ProfileArticles from "./profile-articles";
+// import ProfileArticles from "./profile-articles";
+import ArticleList from "@/components/article-search/article-list/article-list";
 
 interface Props {
   id: string;
@@ -44,7 +45,11 @@ function ProfileLayout({ id }: Props) {
         profileId={id}
       />
       {/* <ArticlesTap /> */}
-      <ProfileArticles />
+      {/* FIXME: 하드코딩으로 테스트 중 */}
+      <div className="w-full p-12">
+        <ArticleList searchTerm="자바" onArticleClick={() => {}}/>
+      </div>
+      {/* <ProfileArticles /> */}
     </>
   );
 }

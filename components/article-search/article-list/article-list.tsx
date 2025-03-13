@@ -14,7 +14,7 @@ import { useInfiniteScrollObserver } from "../hooks/useInfiniteScrollObserver";
 
 interface Props {
   searchTerm: string;
-  onArticleClick: () => void;
+  onArticleClick: (article: Article) => void;
 }
 
 function ArticleList({ searchTerm, onArticleClick }: Props) {
@@ -59,7 +59,7 @@ function ArticleList({ searchTerm, onArticleClick }: Props) {
               key={article.id}
               article={article}
               viewMode={viewMode}
-              onArticleClick={onArticleClick}
+              onArticleClick={() => onArticleClick(article)}
             />
           ))}
           {isFetchingNextPage && <Skeleton className="h-48 col-span-full" />}
