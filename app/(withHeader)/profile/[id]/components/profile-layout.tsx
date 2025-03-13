@@ -11,6 +11,7 @@ import Follow from "./follow";
 import Introduce from "./introduce";
 import ProfileImage from "./profile-image";
 import UserName from "./user-name";
+import ProfileArticles from "./profile-articles";
 
 interface Props {
   id: string;
@@ -43,6 +44,7 @@ function ProfileLayout({ id }: Props) {
         profileId={id}
       />
       {/* <ArticlesTap /> */}
+      <ProfileArticles />
     </>
   );
 }
