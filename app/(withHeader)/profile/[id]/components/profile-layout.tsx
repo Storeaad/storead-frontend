@@ -6,10 +6,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { myProfileQueryOption } from "@/hooks/queryOptions/myProfileQueryOption";
 import { userProfileQueryOption } from "@/hooks/queryOptions/userProfileQueryOption";
 
-// import ArticlesTap from "./articles-tab";
 import Follow from "./follow";
 import Introduce from "./introduce";
-import ProfileImage from "./profile_image";
+import ProfileArticles from "./profile-articles";
+import ProfileImage from "./profile-image";
 import UserName from "./user-name";
 
 interface Props {
@@ -43,6 +43,7 @@ function ProfileLayout({ id }: Props) {
         profileId={id}
       />
       {/* <ArticlesTap /> */}
+      <ProfileArticles profileId={id} />
     </>
   );
 }

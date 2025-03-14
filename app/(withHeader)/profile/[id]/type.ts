@@ -24,6 +24,10 @@ export interface IntroduceProps {
   profileId: string;
 }
 
+export interface ProfileArticlesProps {
+  profileId: string;
+}
+
 export type ProfilePayload = Partial<
   Pick<Profile, "about_me" | "name"> & {
     profile_photo: File | Profile["profile_photo"];

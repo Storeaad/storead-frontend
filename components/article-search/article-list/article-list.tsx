@@ -14,7 +14,7 @@ import { useInfiniteScrollObserver } from "../hooks/useInfiniteScrollObserver";
 
 interface Props {
   searchTerm: string;
-  onArticleClick: () => void;
+  onArticleClick: (article: Article) => void;
 }
 
 function ArticleList({ searchTerm, onArticleClick }: Props) {
@@ -33,7 +33,7 @@ function ArticleList({ searchTerm, onArticleClick }: Props) {
 
   useEffect(() => {
     if (error) {
-      toast("목록을 가져오는 중에 예기치못한 에러가 발생했습니다.");
+      toast("목록을 가져오는 중에 예기치 못한 에러가 발생했습니다.");
     }
   }, [error]);
 
@@ -59,7 +59,7 @@ function ArticleList({ searchTerm, onArticleClick }: Props) {
               key={article.id}
               article={article}
               viewMode={viewMode}
-              onArticleClick={onArticleClick}
+              onArticleClick={() => onArticleClick(article)}
             />
           ))}
           {isFetchingNextPage && <Skeleton className="h-48 col-span-full" />}

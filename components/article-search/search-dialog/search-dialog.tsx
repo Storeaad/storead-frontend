@@ -16,6 +16,7 @@ import {
 import ArticleList from "../article-list/article-list";
 import { useSearchForm } from "../hooks/useSearchForm";
 import ViewMode from "../view-mode/view-mode";
+import { useRouter } from "next/navigation";
 
 function SearchDialog() {
   const { methods, searchTerm, onSubmit } = useSearchForm();
