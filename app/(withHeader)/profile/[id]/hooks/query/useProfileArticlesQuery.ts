@@ -1,11 +1,12 @@
-import { getArticleList } from '@/lib/apis/article/articleList';
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
-export function useProfileArticlesQuery(page: number) {
+import { getMyArticles } from "@/lib/apis/article/myArticles";
+
+export function useProfileArticlesQuery(enabled: boolean) {
   return useQuery({
-    queryKey: ['articles', page],
-    queryFn: () => getArticleList(new URLSearchParams(`?page=${page}`)),
-    placeholderData: keepPreviousData,
+    queryKey: ["articles", "me"],
+    queryFn: () => getMyArticles(),
     select: (data) => data.results.data,
+    enabled,
   });
 }

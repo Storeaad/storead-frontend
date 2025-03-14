@@ -6,13 +6,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { myProfileQueryOption } from "@/hooks/queryOptions/myProfileQueryOption";
 import { userProfileQueryOption } from "@/hooks/queryOptions/userProfileQueryOption";
 
-// import ArticlesTap from "./articles-tab";
 import Follow from "./follow";
 import Introduce from "./introduce";
+import ProfileArticles from "./profile-articles";
 import ProfileImage from "./profile-image";
 import UserName from "./user-name";
-// import ProfileArticles from "./profile-articles";
-import ArticleList from "@/components/article-search/article-list/article-list";
 
 interface Props {
   id: string;
@@ -45,11 +43,7 @@ function ProfileLayout({ id }: Props) {
         profileId={id}
       />
       {/* <ArticlesTap /> */}
-      {/* FIXME: 하드코딩으로 테스트 중 */}
-      <div className="w-full p-12">
-        <ArticleList searchTerm="자바" onArticleClick={() => {}}/>
-      </div>
-      {/* <ProfileArticles /> */}
+      <ProfileArticles profileId={id} />
     </>
   );
 }

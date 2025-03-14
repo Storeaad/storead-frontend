@@ -33,7 +33,7 @@ function ArticleList({ searchTerm, onArticleClick }: Props) {
 
   useEffect(() => {
     if (error) {
-      toast("목록을 가져오는 중에 예기치못한 에러가 발생했습니다.");
+      toast("목록을 가져오는 중에 예기치 못한 에러가 발생했습니다.");
     }
   }, [error]);
 
