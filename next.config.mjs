@@ -37,6 +37,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "storead-storage.s3.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "storead-apne2-contents-bucket.s3.amazonaws.com",
+      },
     ],
   },
 };
