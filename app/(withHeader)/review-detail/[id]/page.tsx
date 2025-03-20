@@ -4,6 +4,9 @@ import TUIViewer from "@/components/tui-editor/tui-viewer";
 import { getArticleDetail } from "@/lib/apis/article/retrieveSingleArticle";
 import { getMyProfile } from "@/lib/apis/profile/myProfile";
 
+import Info from "../components/info";
+import Recommend from "../components/recommend";
+
 interface Props {
   params: Promise<{ id: string }>;
 }
@@ -28,7 +31,7 @@ async function ReviewDetail({ params }: Props) {
 
   return (
     <div className="mt-8 flex flex-col gap-8">
-      <h2 className="font-bold text-lg">{article.title}</h2>
+      <Info article={article} />
       <BookCard
         title={article.book.title}
         image={article.book.thumbnail_url ?? ""}
@@ -36,6 +39,13 @@ async function ReviewDetail({ params }: Props) {
         description={article.book.description}
       />
       <TUIViewer initialValue={parseJSON(article.body)} />
+      {profile != null && (
+        <Recommend
+          articleId={article.id}
+          recommendCount={parseInt(article.recommend_count)}
+          profile={profile}
+        />
+      )}
       <Comments
         articleId={id}
         isUser={Boolean(profile)}
