@@ -15,10 +15,12 @@ import { booksCreate } from "@/lib/apis/book/booksCreate";
 import { useTagsStore } from "@/store/tags-store";
 
 import { reviewSchema } from "../constants/schema";
+import { rateArticle } from "@/lib/apis/rating/rateArticle";
 
 export type ReviewFormValue = {
   title: string;
   period: DateRange;
+  rating: number;
   isBookSelected: boolean;
 };
 
@@ -33,6 +35,7 @@ export const useReviewForm = () => {
     defaultValues: {
       title: "",
       // period: {},
+      rating: 5,
       isBookSelected: false,
     },
   });
@@ -65,6 +68,8 @@ export const useReviewForm = () => {
 
     const body = tuiEditorRef.current?.getMarkdown();
 
+    try {
+
     const article = await createArticle({
       body: JSON.stringify(body),
       book: bookDetail.id,
@@ -75,7 +80,13 @@ export const useReviewForm = () => {
       slug: form.getValues("title").replace(/\s/g, "-"),
     });
 
+    await rateArticle(article.id, form.getValues("rating"))
+      
     router.replace(`/review-detail/${article.id}`);
+    } catch (err) {
+      //FIXME: 에러 처리
+      console.log("Error on create review:", err);
+    }
   };
 
   return {

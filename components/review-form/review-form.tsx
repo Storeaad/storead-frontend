@@ -2,6 +2,7 @@
 
 import TUIEditor from "../tui-editor/tui-editor";
 import { Form } from "../ui/form";
+import BookRate from "./components/book-rate";
 import ReviewButtonGroup from "./components/review-button-group";
 // import Period from "./components/period";
 import ReviewEditor from "./components/review-editor";
@@ -29,6 +30,7 @@ function ReviewForm() {
               ref={bookSearchRef}
               selectedBook={selectedBook}
             />
+            <BookRate />
           </div>
           <div className="mt-8 flex flex-col gap-8">
             <h2 className="font-bold text-lg">서평 작성</h2>
