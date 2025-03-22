@@ -7,6 +7,7 @@ import { toast } from "sonner";
 
 import { Profile } from "@/apis/generated/models";
 import { Button } from "@/components/ui/button";
+import { cancleRecommendArticle } from "@/lib/apis/article/cancleRecommendArticle";
 import { recommendArticle } from "@/lib/apis/article/recommendArticle";
 
 import { useMyRecommendedArticleQuery } from "../hooks/query/useMyRecommededArticle";
@@ -16,6 +17,7 @@ interface Props {
   recommendCount: number;
   profile: Profile;
 }
+
 function Recommend({ articleId, recommendCount, profile }: Props) {
   const [optimisticCount, setOptimisticCount] = useState(recommendCount);
   const {
@@ -26,10 +28,19 @@ function Recommend({ articleId, recommendCount, profile }: Props) {
 
   const handleRecommend = async () => {
     try {
-      await recommendArticle(articleId, () => {
-        refetch();
-        setOptimisticCount(() => recommendCount + 1);
-      });
+      if (!isLoading) {
+        if (!isRecommended) {
+          await recommendArticle(articleId, () => {
+            refetch();
+            setOptimisticCount((old) => old + 1);
+          });
+          return;
+        }
+        await cancleRecommendArticle(articleId, () => {
+          refetch();
+          setOptimisticCount((old) => old - 1);
+        });
+      }
     } catch (err) {
       toast.error("요청이 실패했습니다. 잠시후 다시 시도해주세요.");
     }
