@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 
+import { Profile } from "@/apis/generated/models";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -11,11 +12,12 @@ import CommentForm from "./components/comment-form";
 import CommentList from "./components/comment-list";
 
 interface Props {
-  isUser: boolean;
+  profile?: Profile | null;
   articleId: string;
 }
 
-function Comments({ isUser, articleId }: Props) {
+function Comments({ profile, articleId }: Props) {
+  const isUser = Boolean(profile);
   const { data: comments, isPending } = useQuery(
     commentListQueryOption(articleId),
   );
@@ -42,6 +44,8 @@ function Comments({ isUser, articleId }: Props) {
           <CommentList
             key={articleId}
             comments={comments}
+            articleId={articleId}
+            profile={profile}
           />
         )}
       </CardContent>

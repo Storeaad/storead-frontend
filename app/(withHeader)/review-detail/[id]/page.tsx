@@ -48,7 +48,7 @@ async function ReviewDetail({ params }: Props) {
       )}
       <Comments
         articleId={id}
-        isUser={Boolean(profile)}
+        profile={profile}
       />
     </div>
   );
