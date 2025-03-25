@@ -8,10 +8,14 @@ import { Viewer, ViewerProps } from "@toast-ui/react-editor";
 import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 
-import { toggleDark } from "./utils/toggle-dark";
+import { Card } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
+import { toggleDark } from "./utils/toggle-dark";
 
-const WrappedEditor = dynamic(() => import("./wrapped-viewer"), { ssr: false, loading: () => (<Skeleton className="w-[500px] h-[500px] rounded-md" />)});
+const WrappedEditor = dynamic(() => import("./wrapped-viewer"), {
+  ssr: false,
+  loading: () => <Skeleton className="w-[500px] h-[500px] rounded-md" />,
+});
 
 const ForwardedViewer = forwardRef(
   (props: ViewerProps, forwardedRef: ForwardedRef<Viewer>) => {
@@ -34,13 +38,15 @@ const TUIViewer = (props: ViewerProps) => {
   }, [resolvedTheme]);
 
   return (
-    <ForwardedViewer
-      ref={viewerRef}
-      language="ko-KR"
-      height="600px"
-      theme={resolvedTheme === "dark" ? "dark" : "default"}
-      {...props}
-    />
+    <Card className="p-6 rounded-2xl shadow-lg">
+      <ForwardedViewer
+        ref={viewerRef}
+        language="ko-KR"
+        height="600px"
+        theme={resolvedTheme === "dark" ? "dark" : "default"}
+        {...props}
+      />
+    </Card>
   );
 };
 

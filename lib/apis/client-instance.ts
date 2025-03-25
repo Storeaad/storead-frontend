@@ -12,6 +12,7 @@ export const clientInstance = async <T>({
   method = "GET",
   params,
   includeAuth = true,
+  callbackFn,
   ...init
 }: InstanceInit) => {
   const originalRequest = (accessToken?: string | null) => {
@@ -65,6 +66,10 @@ export const clientInstance = async <T>({
     );
 
     return verifiedData;
+  }
+
+  if (callbackFn) {
+    callbackFn(response);
   }
 
   const data = await (response.json() as Promise<T>);

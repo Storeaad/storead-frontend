@@ -1,7 +1,7 @@
 "use client";
 
 import { Avatar } from "@radix-ui/react-avatar";
-import { Calendar, Eye, MessageSquare } from "lucide-react";
+import { Calendar, Eye, MessageSquare, ThumbsUp } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -74,6 +74,10 @@ const ArticleCard = ({
                     {article.views}
                   </span>
                   <span className="flex items-center">
+                    <ThumbsUp className="w-3 h-3 mr-1" />
+                    {article.recommend_count}
+                  </span>
+                  <span className="flex items-center">
                     <MessageSquare className="w-3 h-3 mr-1" />
                     {article.comments_count}
                   </span>
@@ -111,6 +115,10 @@ const ArticleCard = ({
                 <span className="flex items-center">
                   <MessageSquare className="w-4 h-4 mr-1" />
                   {article.comments_count}
+                </span>
+                <span className="flex items-center">
+                  <ThumbsUp className="w-3 h-3 mr-1" />
+                  {article.recommend_count}
                 </span>
                 <span className="flex items-center">
                   <Calendar className="w-4 h-4 mr-1" />

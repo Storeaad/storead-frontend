@@ -11,6 +11,7 @@ export type Comment = {
   content: string;
   readonly created_at: string;
   readonly id: string;
+  readonly user_id: string;
   /** @nullable */
   parent_comment?: number | null;
   readonly pkid: number;
