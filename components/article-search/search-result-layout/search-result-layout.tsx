@@ -7,12 +7,12 @@ import SearchForm from "@/components/search-form/search-form";
 import ArticleList from "../article-list/article-list";
 import { useSearchForm } from "../hooks/useSearchForm";
 import ViewMode from "../view-mode/view-mode";
+import { Article } from "@/apis/generated/models";
 
 function SearchResultLayout() {
   const { searchTerm, methods, onSubmit } = useSearchForm();
 
-  //TODO: 게시글 클릭 함수 기능 추가 필요
-  const onArticleClick = () => {};
+  const handleArticleClick = () => {};
 
   return (
     <div className="container mx-auto px-4">
@@ -32,7 +32,7 @@ function SearchResultLayout() {
       <div className="overflow-y-auto">
         <ArticleList
           searchTerm={searchTerm}
-          onArticleClick={onArticleClick}
+          onArticleClick={handleArticleClick}
         />
       </div>
     </div>

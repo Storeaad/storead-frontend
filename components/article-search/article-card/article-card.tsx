@@ -1,7 +1,10 @@
+"use client";
+
 import { Avatar } from "@radix-ui/react-avatar";
 import { Calendar, Eye, MessageSquare } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { Article } from "@/apis/generated/models";
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -16,17 +19,21 @@ const ArticleCard = ({
 }: {
   article: Article;
   viewMode: "list" | "grid";
-  onArticleClick: () => void;
+  onArticleClick?: () => void;
 }) => {
+  const router = useRouter();
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("ko-KR");
   };
 
   return (
-    <Link
-      href={`/review-detail/${article.id}`}
-      onClick={onArticleClick}
+    <div
+      className="hover:cursor-pointer hover:shadow-md dark:shadow-white transition-shadow rounded-md"
+      onClick={() => {
+        router.push(`/review-detail/${article.id}`);
+        onArticleClick && onArticleClick();
+      }}
     >
       {viewMode === "list" ? (
         <Card className="overflow-hidden">
@@ -45,6 +52,7 @@ const ArticleCard = ({
                 <Link
                   href={`/profile/${article.author_info.profile_id}`}
                   className="flex space-x-4 mb-2 items-center hover:cursor-pointer"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <Avatar className="w-8 h-8">
                     <AvatarImage src={article.author_info.profile_photo} />
@@ -113,7 +121,7 @@ const ArticleCard = ({
           </CardContent>
         </Card>
       )}
-    </Link>
+    </div>
   );
 };
 
