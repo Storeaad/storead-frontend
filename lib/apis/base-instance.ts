@@ -8,6 +8,7 @@ export interface InstanceInit extends RequestInit {
   endPoint: string;
   params?: URLSearchParams;
   includeAuth?: boolean;
+  callbackFn?: (res?: Response) => void;
 }
 
 export const baseInstance = async ({

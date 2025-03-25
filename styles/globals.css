@@ -84,6 +84,7 @@
   }
 
   .main-content {
+    position: relative;
     margin-left: var(--aside-width);
     width: calc(100vw - var(--aside-width));
     min-height: calc(100vh - var(--header-height) - var(--footer-height));

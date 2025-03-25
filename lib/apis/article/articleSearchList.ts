@@ -6,12 +6,12 @@ import { PaginatedArticleList } from "@/apis/generated/models";
 
 import { clientInstance } from "../client-instance";
 
-export const getArticleList = async (searchParams: URLSearchParams) => {
+export const getArticleSearchList = async (searchParams: URLSearchParams) => {
   const res = await clientInstance<CommonResponse<PaginatedArticleList>>({
-    endPoint: `/articles`,
+    endPoint: `/search`,
     params: searchParams,
     includeAuth: false,
   });
 
-  return res.results.data;
+  return res;
 };
