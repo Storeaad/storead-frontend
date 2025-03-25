@@ -6,4 +6,5 @@ export const QUERY_KEY = {
   FOLLOWING_LIST: "followingList",
   ARTICLE_COMMENTS: "articleComments",
   ARTICLES: "articles",
+  ALL_ARITLES: "allArticles",
 };

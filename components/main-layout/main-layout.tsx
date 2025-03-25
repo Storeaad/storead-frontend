@@ -48,7 +48,7 @@ function MainLayout() {
   }, [searchParams]);
 
   return (
-    <>
+    <div className="h-full flex flex-col justify-center items-center gap-2">
       <div className="text-2xl font-extrabold">
         <TypeIt
           as="h1"
@@ -68,7 +68,7 @@ function MainLayout() {
           <SearchForm />
         </form>
       </FormProvider>
-    </>
+    </div>
   );
 }
 
