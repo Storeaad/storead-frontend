@@ -5,29 +5,23 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 
 import { Article } from "@/apis/generated/models";
+import ArticleCard from "@/components/article-search/article-card/article-card";
+import { useViewModeStore } from "@/components/article-search/hooks/store/useViewModeStore";
+import { useInfiniteScrollObserver } from "@/components/article-search/hooks/useInfiniteScrollObserver";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useReviewListInfiniteQuery } from "@/hooks/useReviewListInfiniteQuery";
 
-import ArticleCard from "../article-card/article-card";
-import { useArticlesInfiniteQuery } from "../hooks/query/useArticlesInfiniteQuery";
-import { useViewModeStore } from "../hooks/store/useViewModeStore";
-import { useInfiniteScrollObserver } from "../hooks/useInfiniteScrollObserver";
-
-interface Props {
-  searchTerm: string;
-  onArticleClick?: (article: Article) => void;
-}
-
-function ArticleList({ searchTerm, onArticleClick = () => {} }: Props) {
+function ReviewList() {
   const viewMode = useViewModeStore((state) => state.viewMode);
 
   const {
     data: articles = [],
+    isLoading,
+    error,
     fetchNextPage,
     hasNextPage,
-    isLoading,
     isFetchingNextPage,
-    error,
-  } = useArticlesInfiniteQuery(searchTerm);
+  } = useReviewListInfiniteQuery();
 
   const { observerRef } = useInfiniteScrollObserver(fetchNextPage, hasNextPage);
 
@@ -59,7 +53,6 @@ function ArticleList({ searchTerm, onArticleClick = () => {} }: Props) {
               key={article.id}
               article={article}
               viewMode={viewMode}
-              onArticleClick={() => onArticleClick(article)}
             />
           ))}
           {isFetchingNextPage && <Skeleton className="h-48 col-span-full" />}
@@ -73,4 +66,4 @@ function ArticleList({ searchTerm, onArticleClick = () => {} }: Props) {
   );
 }
 
-export default ArticleList;
+export default ReviewList;
