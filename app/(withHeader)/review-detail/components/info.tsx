@@ -1,15 +1,16 @@
 "use client";
 
-import { Eye, ThumbsUp } from "lucide-react";
+import { Edit, Eye, ThumbsUp, Trash2 } from "lucide-react";
 
-import { Article } from "@/apis/generated/models";
+import { Article, Profile } from "@/apis/generated/models";
 import { Card } from "@/components/ui/card";
 
 interface Props {
   article: Article;
+  myProfile: Profile | null;
 }
 
-function Info({ article }: Props) {
+function Info({ article, myProfile }: Props) {
   const displayDate = new Date(
     article.updated_at || article.created_at,
   ).toLocaleDateString();
@@ -28,6 +29,16 @@ function Info({ article }: Props) {
           <span>{displayDate}</span>
         </div>
       </div>
+      {myProfile && (
+        <div className="flex justify-end space-x-2">
+          <button className="p-2 rounded-md hover:bg-gray-100 dark:hover:text-black">
+            <Edit className="w-5 h-5" />
+          </button>
+          <button className="p-2 rounded-md hover:bg-gray-100 text-red-500">
+            <Trash2 className="w-5 h-5" />
+          </button>
+        </div>
+      )}
     </Card>
   );
 }
