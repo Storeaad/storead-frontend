@@ -28,6 +28,14 @@ function Follow({ profileId }: FollowProps) {
     useSuspenseQuery({
       ...followingListQueryOption(profileId),
     });
+  const handleFollowStateChange = () => {
+    queryClient.invalidateQueries({
+      queryKey: [QUERY_KEY.FOLLOWER_LIST, profileId],
+    });
+    queryClient.invalidateQueries({
+      queryKey: [QUERY_KEY.FOLLOWING_LIST, profileId],
+    });
+  };
 
   if (isFollowerPending || isFollowingPending) {
     return <Skeleton className="w-24 h-8" />;
@@ -44,6 +52,7 @@ function Follow({ profileId }: FollowProps) {
             list={followerList.followers || []}
             profileId={profileId}
             isMe={profileId === userInfo?.profile_id}
+            onFollowStateChange={handleFollowStateChange}
           />
         </div>
         <LuDot />
@@ -55,6 +64,7 @@ function Follow({ profileId }: FollowProps) {
             trigger="followings"
             list={followingList.followers || []}
             profileId={profileId}
+            onFollowStateChange={handleFollowStateChange}
           />
         </div>
       </section>

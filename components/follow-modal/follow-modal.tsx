@@ -17,21 +17,39 @@ interface Props extends PropsWithChildren {
   list: Following[];
   profileId: string;
   isMe?: boolean;
+  onFollowStateChange?: () => void; // 팔로우 상태 변경 콜백 추가
 }
 
-function FollowModal({ trigger, list, profileId, isMe }: Props) {
+function FollowModal({
+  trigger,
+  list,
+  profileId,
+  isMe,
+  onFollowStateChange,
+}: Props) {
   const unfollowMutation = useUnfollowMutaion(profileId);
 
   const handleUnfollow = (userId: string) => {
-    unfollowMutation.mutate(userId);
+    unfollowMutation.mutate(userId, {
+      onSuccess: () => {
+        // 언팔로우 성공 시 콜백 호출
+        if (onFollowStateChange) {
+          onFollowStateChange();
+        }
+      },
+    });
   };
 
   return (
     <Dialog>
-      <DialogTrigger>{trigger}</DialogTrigger>
+      <DialogTrigger>
+        {trigger === "followers" ? "팔로워" : "팔로잉"}
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Follower List</DialogTitle>
+          <DialogTitle>
+            {trigger === "followers" ? "팔로워 목록" : "팔로잉 목록"}
+          </DialogTitle>
           {list.length > 0 ? (
             list.map((follow) => (
               <div

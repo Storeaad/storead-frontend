@@ -11,12 +11,14 @@ export const useUnfollowMutaion = (profileId: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (userId: string) => userUnfollow(userId),
+    mutationFn: userUnfollow,
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY.FOLLOWER_LIST, profileId],
       });
-
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.FOLLOWING_LIST, profileId],
+      });
       toast("팔로우를 취소했습니다.");
     },
   });
