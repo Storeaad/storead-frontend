@@ -27,7 +27,9 @@ interface Props {
   placeholder?: string;
 }
 
-const SearchForm = ({ placeholder = "검색어를 입력해주세요." }: Props) => {
+const SearchForm = ({
+  placeholder = "원하시는 서평을 검색해보세요.",
+}: Props) => {
   const { register, watch } = useFormContext();
   const [open, setOpen] = useState(false);
   const [list, setList] = useState<string[]>([]);
@@ -48,14 +50,18 @@ const SearchForm = ({ placeholder = "검색어를 입력해주세요." }: Props)
       open={open}
       onOpenChange={setOpen}
     >
-      <PopoverAnchor>
-        <div className="flex gap-2">
+      <PopoverAnchor className="w-full">
+        <div className="relative w-full">
           <Input
             {...register("query")}
             placeholder={placeholder}
-            className="flex-grow"
+            className="w-full pr-12 py-6"
           />
-          <Button type="submit">
+          <Button
+            type="submit"
+            className="absolute right-0 top-0 h-full px-3"
+            variant="ghost"
+          >
             <Search className="w-4 h-4" />
           </Button>
         </div>

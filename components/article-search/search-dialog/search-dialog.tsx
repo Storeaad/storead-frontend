@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FormProvider } from "react-hook-form";
 
 import { Search } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import SearchForm from "@/components/search-form/search-form";
 import AsideTooltip from "@/components/sidebar/components/aside-tooltip";
@@ -16,7 +17,6 @@ import {
 import ArticleList from "../article-list/article-list";
 import { useSearchForm } from "../hooks/useSearchForm";
 import ViewMode from "../view-mode/view-mode";
-import { useRouter } from "next/navigation";
 
 function SearchDialog() {
   const { methods, searchTerm, onSubmit } = useSearchForm();
@@ -45,9 +45,12 @@ function SearchDialog() {
       </AsideTooltip>
       <DialogContent className="p-4 overflow-hidden shadow-lg">
         <DialogHeader>
-          <div className="flex flex-1 mb-4 justify-center space-x-4">
+          <div className="mt-12 w-full flex flex-col flex-1 mb-4 items-end space-y-4">
             <FormProvider {...methods}>
-              <form onSubmit={methods.handleSubmit(onSubmit)}>
+              <form
+                onSubmit={methods.handleSubmit(onSubmit)}
+                className="w-full"
+              >
                 <SearchForm />
               </form>
             </FormProvider>
@@ -58,6 +61,7 @@ function SearchDialog() {
           <ArticleList
             searchTerm={searchTerm}
             onArticleClick={handleArticleClick}
+            isDialog
           />
         </div>
       </DialogContent>

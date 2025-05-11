@@ -45,13 +45,33 @@ const ArticleCard = ({
                 width={60}
                 height={40}
               />
-              <div className="flex flex-col space-y-2">
-                <p className="text-lg font-medium text-foreground truncate">
+              <div className="flex w-full items-center justify-center space-x-8">
+                <p className="ml-4 flex-grow text-lg font-medium text-foreground truncate">
                   {article.title}
                 </p>
+
+                <div className="flex items-center text-gray-500 mt-1 space-x-4">
+                  {/* 조회수 일단 제외 */}
+                  {/* <span className="flex items-center">
+                    <Eye className="w-3 h-3 mr-1" />
+                    {article.views}
+                  </span> */}
+                  <span className="flex items-center">
+                    <ThumbsUp className="w-3 h-3 mr-1" />
+                    {article.recommend_count}
+                  </span>
+                  <span className="flex items-center">
+                    <MessageSquare className="w-3 h-3 mr-1" />
+                    {article.comments_count}
+                  </span>
+                  <span className="flex items-center">
+                    <Calendar className="w-3 h-3 mr-1" />
+                    {formatDate(article.updated_at || article.created_at)}
+                  </span>
+                </div>
                 <Link
                   href={`/profile/${article.author_info.profile_id}`}
-                  className="flex space-x-4 mb-2 items-center hover:cursor-pointer"
+                  className="flex space-x-1 mb-2 items-center hover:cursor-pointer"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Avatar className="w-8 h-8">
@@ -68,24 +88,6 @@ const ArticleCard = ({
                     {article.author_info.name}
                   </Button>
                 </Link>
-                <div className="flex items-center text-xs text-gray-500 mt-1 space-x-2">
-                  <span className="flex items-center">
-                    <Eye className="w-3 h-3 mr-1" />
-                    {article.views}
-                  </span>
-                  <span className="flex items-center">
-                    <ThumbsUp className="w-3 h-3 mr-1" />
-                    {article.recommend_count}
-                  </span>
-                  <span className="flex items-center">
-                    <MessageSquare className="w-3 h-3 mr-1" />
-                    {article.comments_count}
-                  </span>
-                  <span className="flex items-center">
-                    <Calendar className="w-3 h-3 mr-1" />
-                    {formatDate(article.updated_at || article.created_at)}
-                  </span>
-                </div>
               </div>
             </div>
           </CardContent>
@@ -100,18 +102,12 @@ const ArticleCard = ({
               height={40}
             />
             <div className="flex flex-col">
-              <h3 className="text-lg font-semibold flex-1">{article.title}</h3>
-              <Avatar className="w-8 h-8 mb-2">
-                <AvatarImage src={article.author_info.profile_photo} />
-                <AvatarFallback>
-                  {article.author_info.name.substring(0, 1).toUpperCase()}
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex items-center space-x-4 text-sm text-gray-500 mt-auto">
-                <span className="flex items-center">
+              <h3 className="text-lg font-semibold">{article.title}</h3>
+              <div className="flex-1 flex items-center space-x-4 text-sm text-gray-500 mt-auto">
+                {/* <span className="flex items-center">
                   <Eye className="w-4 h-4 mr-1" />
                   {article.views}
-                </span>
+                </span> */}
                 <span className="flex items-center">
                   <MessageSquare className="w-4 h-4 mr-1" />
                   {article.comments_count}
@@ -125,6 +121,25 @@ const ArticleCard = ({
                   {formatDate(article.updated_at || article.created_at)}
                 </span>
               </div>
+              <Link
+                href={`/profile/${article.author_info.profile_id}`}
+                className="flex space-x-1 mb-2 items-center hover:cursor-pointer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Avatar className="w-8 h-8">
+                  <AvatarImage src={article.author_info.profile_photo} />
+                  <AvatarFallback>
+                    {article.author_info.name.substring(0, 1).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+                <Button
+                  type="button"
+                  variant="link"
+                  className="text-sm text-muted-foreground"
+                >
+                  {article.author_info.name}
+                </Button>
+              </Link>
             </div>
           </CardContent>
         </Card>
