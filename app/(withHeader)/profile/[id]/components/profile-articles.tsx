@@ -22,7 +22,7 @@ function ProfileArticles({ profileId }: ProfileArticlesProps) {
   if (!isMe) return null;
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full mt-4 bg-neutral-200 dark:bg-neutral-700">
       {status === "pending" ? (
         <Skeleton className="w-500 h-500" />
       ) : status === "error" ? (

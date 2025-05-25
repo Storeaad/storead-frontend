@@ -42,10 +42,10 @@ function Follow({ profileId }: FollowProps) {
   }
 
   return (
-    <div className="flex items-center gap-2">
-      <GoPeople />
-      <section className="flex items-center">
-        <div className="flex gap-1 hover:text-blue-500 hover:cursor-pointer">
+    <div className="mt-2 flex items-center gap-2">
+      {/* <GoPeople /> */}
+      <section className="flex gap-4 items-center">
+        <div className="flex flex-col items-center gap-1 hover:text-blue-500 hover:cursor-pointer">
           <span className="font-bold">{followerList.followers_count || 0}</span>
           <FollowModal
             trigger="followers"
@@ -56,7 +56,7 @@ function Follow({ profileId }: FollowProps) {
           />
         </div>
         <LuDot />
-        <div className="flex gap-1 hover:text-blue-500 hover:cursor-pointer">
+        <div className="flex flex-col items-center gap-1 hover:text-blue-500 hover:cursor-pointer">
           <span className="font-bold">
             {followingList.followers_count || 0}
           </span>

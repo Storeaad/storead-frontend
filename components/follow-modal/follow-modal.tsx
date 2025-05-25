@@ -43,12 +43,12 @@ function FollowModal({
   return (
     <Dialog>
       <DialogTrigger>
-        {trigger === "followers" ? "팔로워" : "팔로잉"}
+        {trigger === "followers" ? "followers" : "followings"}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            {trigger === "followers" ? "팔로워 목록" : "팔로잉 목록"}
+            {trigger === "followers" ? "follower list" : "following list"}
           </DialogTitle>
           {list.length > 0 ? (
             list.map((follow) => (

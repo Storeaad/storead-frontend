@@ -67,11 +67,11 @@ function ProfileLayout({ id }: Props) {
         name={userProfile?.name || myProfile?.name}
         profileId={id}
       />
-      <Follow profileId={id} />
       <Introduce
         introduce={userProfile?.about_me || myProfile?.about_me}
         profileId={id}
       />
+      <Follow profileId={id} />
       {/* <ArticlesTap /> */}
       <ProfileArticles profileId={id} />
     </>
