@@ -4,6 +4,7 @@ import { FormProvider } from "react-hook-form";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 
+import { Article } from "@/apis/generated/models";
 import SearchForm from "@/components/search-form/search-form";
 import AsideTooltip from "@/components/sidebar/components/aside-tooltip";
 import { Button } from "@/components/ui/button";
@@ -20,10 +21,14 @@ import ViewMode from "../view-mode/view-mode";
 
 function SearchDialog() {
   const { methods, searchTerm, onSubmit } = useSearchForm();
+  const [articles, setArticles] = useState<Article[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleArticleClick = () => {
     setIsOpen(false);
+  };
+  const handleArticlesChange = (newArticles: Article[]) => {
+    setArticles(newArticles);
   };
 
   return (
@@ -45,7 +50,7 @@ function SearchDialog() {
       </AsideTooltip>
       <DialogContent className="p-4 overflow-hidden shadow-lg">
         <DialogHeader>
-          <div className="mt-12 w-full flex flex-col flex-1 mb-4 items-end space-y-4">
+          <div className="mt-12 px-4 w-full flex flex-col flex-1 mb-4 items-end space-y-4">
             <FormProvider {...methods}>
               <form
                 onSubmit={methods.handleSubmit(onSubmit)}
@@ -54,12 +59,18 @@ function SearchDialog() {
                 <SearchForm />
               </form>
             </FormProvider>
-            <ViewMode />
+            <div className="w-full flex justify-between items-center mt-8">
+              <span className="text-sm text-gray-500">
+                {searchTerm ? `검색결과: ${articles.length}개` : ""}
+              </span>
+              <ViewMode />
+            </div>
           </div>
         </DialogHeader>
         <div className="max-h-[70vh] overflow-auto">
           <ArticleList
             searchTerm={searchTerm}
+            onArticlesChange={handleArticlesChange}
             onArticleClick={handleArticleClick}
             isDialog
           />

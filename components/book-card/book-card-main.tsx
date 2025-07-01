@@ -1,6 +1,10 @@
+"use client";
+
 import { PropsWithChildren } from "react";
 
 import Image from "next/image";
+
+import { useImageFallback } from "@/hooks/useImageFallback";
 
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 
@@ -12,14 +16,17 @@ interface Props {
 }
 
 export function BookCardMain(props: Props & PropsWithChildren) {
+  const { imageSrc, handleError } = useImageFallback(props.image);
   //TODO: 해당 책에 대한 서평 목록 / 해당 책 서평 작성 버튼
   return (
     <Card className="flex md:flex-row gap-8 h-[250px] p-4">
       <Image
-        src={props.image}
+        src={imageSrc}
         alt={props.title}
         width={180}
         height={250}
+        onError={handleError}
+        unoptimized
         className="rounded-lg"
       />
       <div className="w-[240px] flex flex-col gap-4 flex-grow">

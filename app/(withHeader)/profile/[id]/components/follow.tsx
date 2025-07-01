@@ -1,8 +1,5 @@
 "use client";
 
-import { GoPeople } from "react-icons/go";
-import { LuDot } from "react-icons/lu";
-
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 
 import { Profile } from "@/apis/generated/models";
@@ -44,7 +41,7 @@ function Follow({ profileId }: FollowProps) {
   return (
     <div className="mt-2 flex items-center gap-2">
       {/* <GoPeople /> */}
-      <section className="flex gap-4 items-center">
+      <section className="flex gap-8 items-center">
         <div className="flex flex-col items-center gap-1 hover:text-blue-500 hover:cursor-pointer">
           <span className="font-bold">{followerList.followers_count || 0}</span>
           <FollowModal
@@ -55,14 +52,13 @@ function Follow({ profileId }: FollowProps) {
             onFollowStateChange={handleFollowStateChange}
           />
         </div>
-        <LuDot />
         <div className="flex flex-col items-center gap-1 hover:text-blue-500 hover:cursor-pointer">
           <span className="font-bold">
             {followingList.followers_count || 0}
           </span>
           <FollowModal
             trigger="followings"
-            list={followingList.followers || []}
+            list={followingList.following || []}
             profileId={profileId}
             onFollowStateChange={handleFollowStateChange}
           />

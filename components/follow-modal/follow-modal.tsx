@@ -1,5 +1,7 @@
 import React, { PropsWithChildren } from "react";
 
+import Link from "next/link";
+
 import { Following } from "@/apis/generated/models";
 import {
   Dialog,
@@ -9,6 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { UnfollowAlert } from "./components/unfollow-alert";
 import { useUnfollowMutaion } from "./hooks/mutaion/useUnfollowMutaion";
 
@@ -43,7 +46,7 @@ function FollowModal({
   return (
     <Dialog>
       <DialogTrigger>
-        {trigger === "followers" ? "followers" : "followings"}
+        {trigger === "followers" ? "Followers" : "Followings"}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -56,7 +59,23 @@ function FollowModal({
                 key={follow.id}
                 className="flex justify-between items-center py-2"
               >
-                <span>{follow.name}</span>
+                <Link
+                  className="flex items-center"
+                  href={`/profile/${follow.id}`}
+                >
+                  <Avatar className="mr-2">
+                    <AvatarImage
+                      src={follow.profile_photo || ""}
+                      alt={follow.name}
+                      width={40}
+                      height={40}
+                    />
+                    <AvatarFallback>
+                      {follow.name.substring(0, 1).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <span>{follow.name}</span>
+                </Link>
                 {trigger === "followers" && isMe && (
                   <UnfollowAlert onClick={() => handleUnfollow(follow.id)} />
                 )}

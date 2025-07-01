@@ -55,7 +55,7 @@ const SearchForm = ({
           <Input
             {...register("query")}
             placeholder={placeholder}
-            className="w-full pr-12 py-6"
+            className="w-full pr-12 py-6 shadow-md dark:shadow-white"
           />
           <Button
             type="submit"

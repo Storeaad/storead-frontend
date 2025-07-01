@@ -14,12 +14,14 @@ import { useInfiniteScrollObserver } from "../hooks/useInfiniteScrollObserver";
 
 interface Props {
   searchTerm: string;
+  onArticlesChange?: (articles: Article[]) => void;
   onArticleClick?: (article: Article) => void;
   isDialog?: boolean;
 }
 
 function ArticleList({
   searchTerm,
+  onArticlesChange = () => {},
   onArticleClick = () => {},
   isDialog,
 }: Props) {
@@ -50,7 +52,9 @@ function ArticleList({
     if (error) {
       toast.error("목록을 가져오는 중에 예기치 못한 에러가 발생했습니다.");
     }
-  }, [error]);
+    // 검색 결과가 변경될 때마다 콜백 함수 호출
+    onArticlesChange(articles);
+  }, [error, articles, onArticlesChange]);
 
   return (
     <>
