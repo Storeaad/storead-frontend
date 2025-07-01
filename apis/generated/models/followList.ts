@@ -11,3 +11,9 @@ export type FollowList = {
   followers: Following[];
   followers_count: number;
 };
+
+//FIXME: followers_count 이름이 following_count로 바뀌어야될 것 같습니다.
+export type FollowingList = {
+  following: Following[];
+  followers_count: number;
+};

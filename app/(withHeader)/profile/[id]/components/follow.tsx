@@ -1,8 +1,5 @@
 "use client";
 
-import { GoPeople } from "react-icons/go";
-import { LuDot } from "react-icons/lu";
-
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 
 import { Profile } from "@/apis/generated/models";
@@ -28,33 +25,42 @@ function Follow({ profileId }: FollowProps) {
     useSuspenseQuery({
       ...followingListQueryOption(profileId),
     });
+  const handleFollowStateChange = () => {
+    queryClient.invalidateQueries({
+      queryKey: [QUERY_KEY.FOLLOWER_LIST, profileId],
+    });
+    queryClient.invalidateQueries({
+      queryKey: [QUERY_KEY.FOLLOWING_LIST, profileId],
+    });
+  };
 
   if (isFollowerPending || isFollowingPending) {
     return <Skeleton className="w-24 h-8" />;
   }
 
   return (
-    <div className="flex items-center gap-2">
-      <GoPeople />
-      <section className="flex items-center">
-        <div className="flex gap-1 hover:text-blue-500 hover:cursor-pointer">
+    <div className="mt-2 flex items-center gap-2">
+      {/* <GoPeople /> */}
+      <section className="flex gap-8 items-center">
+        <div className="flex flex-col items-center gap-1 hover:text-blue-500 hover:cursor-pointer">
           <span className="font-bold">{followerList.followers_count || 0}</span>
           <FollowModal
             trigger="followers"
             list={followerList.followers || []}
             profileId={profileId}
             isMe={profileId === userInfo?.profile_id}
+            onFollowStateChange={handleFollowStateChange}
           />
         </div>
-        <LuDot />
-        <div className="flex gap-1 hover:text-blue-500 hover:cursor-pointer">
+        <div className="flex flex-col items-center gap-1 hover:text-blue-500 hover:cursor-pointer">
           <span className="font-bold">
             {followingList.followers_count || 0}
           </span>
           <FollowModal
             trigger="followings"
-            list={followingList.followers || []}
+            list={followingList.following || []}
             profileId={profileId}
+            onFollowStateChange={handleFollowStateChange}
           />
         </div>
       </section>

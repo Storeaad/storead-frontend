@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 import { formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale";
 
@@ -7,6 +11,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
 import DeleteButton from "./delete-button";
+import EditButton from "./edit-button";
+import EditTextarea from "./edit-textarea";
 
 interface Props {
   comments?: Comment[];
@@ -15,6 +21,7 @@ interface Props {
 }
 
 function CommentList({ comments, articleId, profile }: Props) {
+  const [isEdit, setIsEdit] = useState(false);
   return (
     <Card className="w-full">
       <CardContent className="bg-secondary rounded-md">
@@ -33,20 +40,32 @@ function CommentList({ comments, articleId, profile }: Props) {
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
                         <h4 className="font-semibold">{comment.username}</h4>
-                        <p className="text-sm text-gray-500">
-                          {formatDistanceToNow(new Date(comment.created_at), {
-                            addSuffix: true,
-                            locale: ko,
-                          })}
-                        </p>
                         {comment.user_id == profile?.user_id && (
-                          <DeleteButton
-                            commentId={comment.id}
-                            articleId={articleId}
-                          />
+                          <div className="flex gap-2">
+                            <EditButton handleEdit={setIsEdit} />
+                            <DeleteButton
+                              commentId={comment.id}
+                              articleId={articleId}
+                            />
+                          </div>
                         )}
                       </div>
-                      <p className="mt-1">{comment.content}</p>
+                      {isEdit ? (
+                        <EditTextarea
+                          content={comment.content}
+                          commentId={comment.id}
+                          articleId={articleId}
+                          handleEdit={setIsEdit}
+                        />
+                      ) : (
+                        <p className="mt-1">{comment.content}</p>
+                      )}
+                      <p className="text-sm text-gray-500 text-right">
+                        {formatDistanceToNow(new Date(comment.created_at), {
+                          addSuffix: true,
+                          locale: ko,
+                        })}
+                      </p>
                     </div>
                   </div>
                   {idx !== comments.length - 1 && (

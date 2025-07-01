@@ -12,8 +12,9 @@ interface Props {
 }
 
 async function ReviewDetail({ params }: Props) {
+  // 게시글 id
   const { id } = await params;
-  const [article, profile] = await Promise.all([
+  const [article, myProfile] = await Promise.all([
     getArticleDetail(id),
     getMyProfile(),
   ]);
@@ -31,7 +32,10 @@ async function ReviewDetail({ params }: Props) {
 
   return (
     <div className="mt-8 flex flex-col gap-8">
-      <Info article={article} />
+      <Info
+        article={article}
+        myProfile={myProfile}
+      />
       <BookCard
         title={article.book.title}
         image={article.book.thumbnail_url ?? ""}
@@ -39,16 +43,16 @@ async function ReviewDetail({ params }: Props) {
         description={article.book.description}
       />
       <TUIViewer initialValue={parseJSON(article.body)} />
-      {profile != null && (
+      {myProfile != null && (
         <Recommend
           articleId={article.id}
           recommendCount={parseInt(article.recommend_count)}
-          profile={profile}
+          profile={myProfile}
         />
       )}
       <Comments
         articleId={id}
-        profile={profile}
+        profile={myProfile}
       />
     </div>
   );

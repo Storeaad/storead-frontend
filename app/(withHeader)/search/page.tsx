@@ -9,9 +9,9 @@ async function SearchPage({ searchParams }: Props) {
 
   return (
     <div className="p-8 w-full flex flex-col gap-8 items-center">
-      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+      {/* <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
         {`"${query}" 검색결과`}
-      </h1>
+      </h1> */}
       <SearchResultLayout />
     </div>
   );
